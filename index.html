@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Japan 2026 · Our Trip</title>
+<meta name="description" content="Papa, Anastasiya & Vlada — Tokyo → Kyoto, July 9–19 2026, timed for the peak of Gion Matsuri. The whole plan, every ticket, one page.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%AE%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -13,8 +15,9 @@
     --ai:#4d78c9; --ai-soft:#7ea3e0;
     --lantern:#f6b13c; --lantern-hot:#ffd77a; --lantern-glow:rgba(246,177,60,.5);
     --verm:#ec5540; --verm-deep:#c63c28;
-    --paper:#f6f1e6; --dim:#b9c1dd; --dimmer:#8790b6;
+    --paper:#f6f1e6; --dim:#b9c1dd; --dimmer:#8f97bd;
     --ink:#080b1a;
+    --line:rgba(126,163,224,.16);
     --sans:"Zen Kaku Gothic New",system-ui,sans-serif;
     --serif:"Shippori Mincho",Georgia,serif;
   }
@@ -28,32 +31,60 @@
   section{position:relative}
   a{color:var(--lantern-hot);text-decoration:none}
   a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--lantern);outline-offset:3px;border-radius:4px}
+  h1,h2,h3,h4{text-wrap:balance}
+  ::selection{background:var(--verm);color:#fff}
 
-  /* ===== eyebrows / dividers ===== */
+  /* ===== sticky nav ===== */
+  .topnav{
+    position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:center;gap:4px;
+    padding:10px 14px;background:rgba(8,11,26,.82);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);transform:translateY(-110%);transition:transform .35s ease;
+    overflow-x:auto;white-space:nowrap;scrollbar-width:none;
+  }
+  .topnav::-webkit-scrollbar{display:none}
+  .topnav.show{transform:none}
+  .topnav a{
+    font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);
+    padding:6px 12px;border-radius:20px;flex:none;
+  }
+  .topnav a:hover{color:var(--lantern-hot);background:rgba(246,177,60,.1);text-decoration:none}
+  .topnav .brand{color:var(--verm);font-family:var(--serif);font-weight:800;text-transform:none;letter-spacing:.14em;font-size:.86rem}
+
+  /* ===== eyebrows / section headers ===== */
   .eyebrow{
     font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
     color:var(--lantern);font-weight:700;display:flex;align-items:center;gap:12px;margin-bottom:14px;
   }
-  .eyebrow::before{content:"";width:26px;height:2px;background:var(--verm);display:inline-block}
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--verm);display:inline-block;flex:none}
   .eyebrow .jp{font-family:var(--serif);letter-spacing:.05em;color:var(--ai-soft);font-weight:600}
   h2.sec{font-family:var(--serif);font-weight:800;font-size:clamp(1.7rem,4.4vw,2.7rem);line-height:1.15;margin-bottom:6px}
-  .sec-sub{color:var(--dim);max-width:60ch;margin-bottom:34px;font-size:1.02rem}
+  .sec-sub{color:var(--dim);max-width:62ch;margin-bottom:34px;font-size:1.02rem}
+
+  /* seigaiha wave divider */
+  .waves{
+    height:46px;background:
+      radial-gradient(circle at 50% 130%, transparent 0 8px, rgba(126,163,224,.14) 8px 10px, transparent 10px 14px, rgba(126,163,224,.14) 14px 16px, transparent 16px 20px, rgba(126,163,224,.14) 20px 22px, transparent 22px) 0 0/44px 44px repeat-x,
+      radial-gradient(circle at 50% 130%, transparent 0 8px, rgba(126,163,224,.14) 8px 10px, transparent 10px 14px, rgba(126,163,224,.14) 14px 16px, transparent 16px 20px, rgba(126,163,224,.14) 20px 22px, transparent 22px) 22px 22px/44px 44px repeat-x;
+    opacity:.7;margin:0 auto;max-width:1040px;
+  }
 
   /* ===== HERO ===== */
   .hero{
-    min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-    padding:70px 0 50px;position:relative;overflow:hidden;
+    min-height:100svh;display:flex;flex-direction:column;justify-content:flex-start;
+    padding:0;position:relative;overflow:hidden;
     background:
       radial-gradient(120% 80% at 50% -10%, #1c2c63 0%, rgba(28,44,99,0) 55%),
       radial-gradient(90% 60% at 50% 120%, #2a1c3a 0%, rgba(42,28,58,0) 60%),
       linear-gradient(180deg,#0b1128 0%,#0d1430 60%,#0a0f26 100%);
   }
-  .stars{position:absolute;inset:0;pointer-events:none;opacity:.6}
+  .stars{position:absolute;inset:0;pointer-events:none;opacity:.7}
   .stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.5;animation:tw 4s ease-in-out infinite}
+  .stars i.fly{width:4px;height:4px;background:var(--lantern-hot);box-shadow:0 0 8px 2px rgba(255,215,122,.7);animation:drift 9s ease-in-out infinite}
   @keyframes tw{0%,100%{opacity:.15}50%{opacity:.7}}
+  @keyframes drift{0%,100%{transform:translate(0,0);opacity:.1}30%{opacity:.9}50%{transform:translate(26px,-34px);opacity:.5}70%{opacity:.9}}
 
-  /* hanging lanterns */
-  .lanterns{position:absolute;top:0;left:0;right:0;height:230px;display:flex;justify-content:center;gap:min(11vw,120px);pointer-events:none}
+  .lanterns{position:absolute;top:0;left:0;right:0;height:230px;display:flex;justify-content:center;gap:min(11vw,120px);pointer-events:none;z-index:3}
   .lstring{position:relative;transform-origin:top center;animation:sway 6s ease-in-out infinite}
   .lstring:nth-child(2){animation-delay:-1.5s}
   .lstring:nth-child(3){animation-delay:-3s}
@@ -76,7 +107,7 @@
   .lstring.big .lantern{width:60px;height:80px}
   @keyframes glow{0%,100%{box-shadow:0 0 26px 4px var(--lantern-glow),inset 0 0 14px rgba(120,20,0,.35)}50%{box-shadow:0 0 46px 12px var(--lantern-glow),inset 0 0 14px rgba(120,20,0,.35)}}
 
-  .hero-inner{position:relative;z-index:2;text-align:center;padding-top:120px}
+  .hero-inner{position:relative;z-index:2;text-align:center;padding:170px 22px 0}
   .hero .kanji{font-family:var(--serif);font-size:clamp(2.6rem,9vw,5rem);font-weight:800;color:var(--verm);letter-spacing:.15em;line-height:1;filter:drop-shadow(0 4px 20px rgba(236,85,64,.35))}
   .hero h1{font-family:var(--serif);font-weight:800;font-size:clamp(3.2rem,15vw,8.5rem);line-height:.92;letter-spacing:-.01em;margin:.12em 0 .1em;
     background:linear-gradient(180deg,#fff 0%,var(--lantern-hot) 120%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -84,22 +115,25 @@
   .hero .crew{margin-top:16px;color:var(--dim);letter-spacing:.04em;font-size:1.05rem}
   .hero .crew b{color:var(--lantern-hot);font-weight:700}
 
-  /* countdown */
-  .count{display:flex;justify-content:center;gap:10px;margin-top:38px;flex-wrap:wrap}
+  .count{display:flex;justify-content:center;gap:10px;margin-top:34px;flex-wrap:wrap}
   .count .u{background:rgba(255,255,255,.04);border:1px solid rgba(126,163,224,.2);border-radius:14px;padding:14px 18px;min-width:82px;backdrop-filter:blur(4px)}
-  .count .n{font-family:var(--serif);font-weight:800;font-size:2rem;line-height:1;color:#fff}
+  .count .n{font-family:var(--serif);font-weight:800;font-size:2rem;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
   .count .l{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dimmer);margin-top:6px}
-  .count-label{margin-top:16px;color:var(--lantern);font-weight:700;letter-spacing:.14em;font-size:.8rem;text-transform:uppercase}
-  .scrollcue{margin-top:44px;color:var(--dimmer);font-size:.8rem;letter-spacing:.2em;animation:bob 2s ease-in-out infinite}
+  .count-label{margin-top:14px;color:var(--lantern);font-weight:700;letter-spacing:.14em;font-size:.8rem;text-transform:uppercase}
+  .scrollcue{margin-top:22px;color:var(--dimmer);font-size:.8rem;letter-spacing:.2em;animation:bob 2s ease-in-out infinite}
   @keyframes bob{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(6px);opacity:1}}
 
+  /* SVG horizon scene pinned to hero base */
+  .horizon{margin-top:auto;width:100%;display:block;position:relative;z-index:1;pointer-events:none}
+  .horizon svg{display:block;width:100%;height:auto}
+
   /* ===== GLANCE STATS ===== */
-  .glance{padding:64px 0 30px;background:linear-gradient(180deg,#0a0f26,#0d1430)}
+  .glance{padding:56px 0 30px;background:linear-gradient(180deg,#0a0f26,#0d1430)}
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .stat{background:var(--night2);border:1px solid rgba(126,163,224,.14);border-radius:16px;padding:22px 18px;text-align:center}
-  .stat .big{font-family:var(--serif);font-weight:800;font-size:2.4rem;line-height:1;color:var(--lantern)}
+  .stat{background:var(--night2);border:1px solid var(--line);border-radius:16px;padding:22px 18px;text-align:center}
+  .stat .big{font-family:var(--serif);font-weight:800;font-size:2.4rem;line-height:1;color:var(--lantern);font-variant-numeric:tabular-nums}
   .stat .cap{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-top:8px}
-  .banner{margin-top:26px;border-radius:18px;padding:26px 26px;position:relative;overflow:hidden;
+  .banner{margin-top:26px;border-radius:18px;padding:26px;position:relative;overflow:hidden;
     background:linear-gradient(110deg,var(--verm-deep),var(--verm) 60%,#f2703f);border:1px solid rgba(255,215,122,.3)}
   .banner .lab{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;font-weight:700;color:#ffe6b8}
   .banner h3{font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,3.6vw,1.9rem);margin:4px 0 6px;color:#fff}
@@ -110,13 +144,25 @@
   .block{padding:60px 0}
   .block.alt{background:linear-gradient(180deg,#0d1430,#0f1838 60%,#0d1430)}
 
+  /* ===== ROUTE MAP ===== */
+  .routemap{background:var(--night2);border:1px solid var(--line);border-radius:20px;padding:26px 20px 12px;overflow-x:auto}
+  .routemap svg{display:block;width:956px;max-width:none;height:auto;margin:0 auto}
+  .routemap text{font-family:var(--sans)}
+  .routemap .st-kanji{font-family:var(--serif);font-weight:700;fill:var(--paper);font-size:17px}
+  .routemap .st-name{fill:var(--dim);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+  .routemap .st-days{fill:var(--lantern);font-size:11px;font-weight:700}
+  .routemap .leglab{fill:var(--dimmer);font-size:10.5px;letter-spacing:.06em}
+  .map-note{color:var(--dimmer);font-size:.8rem;margin-top:10px;text-align:center;padding-bottom:8px}
+  @media(max-width:1000px){.map-note::after{content:" · swipe the map →"}}
+
   /* crew cards */
   .crew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .person{background:var(--night2);border:1px solid rgba(126,163,224,.14);border-radius:18px;padding:24px;text-align:center}
+  .person{background:var(--night2);border:1px solid var(--line);border-radius:18px;padding:24px;text-align:center}
   .person .av{width:74px;height:74px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;font-size:2.2rem;
     background:radial-gradient(circle at 50% 35%,var(--lantern-hot),var(--lantern) 70%);box-shadow:0 0 24px var(--lantern-glow)}
   .person h4{font-family:var(--serif);font-size:1.25rem;font-weight:700}
   .person .role{color:var(--dim);font-size:.86rem;margin-top:2px}
+  .person .quest{margin-top:10px;font-size:.8rem;color:var(--lantern-hot);background:rgba(246,177,60,.08);border:1px dashed rgba(246,177,60,.3);border-radius:10px;padding:7px 10px}
 
   /* boarding pass */
   .pass{background:linear-gradient(135deg,#182356,#101a42);border-radius:20px;overflow:hidden;border:1px solid rgba(126,163,224,.2);
@@ -130,19 +176,19 @@
   .leg .port small{display:block;font-family:var(--sans);font-weight:500;font-size:.72rem;letter-spacing:.14em;color:var(--dim);margin-top:4px}
   .leg .arrow{color:var(--lantern);font-size:1.1rem;position:relative;text-align:center}
   .leg .arrow small{display:block;font-size:.66rem;color:var(--dimmer);letter-spacing:.08em;margin-top:3px}
-  .leg.ret .port{text-align:right}
   .pass .stub{background:var(--verm-deep);padding:26px 24px;position:relative;display:flex;flex-direction:column;justify-content:center;gap:14px}
   .pass .stub::before{content:"";position:absolute;left:-12px;top:0;bottom:0;width:24px;background:radial-gradient(circle at left,transparent 0 11px,var(--verm-deep) 11px);
-    background-size:24px 22px;background-repeat:repeat-y;left:-12px}
+    background-size:24px 22px;background-repeat:repeat-y}
   .stub .row2{display:flex;justify-content:space-between;gap:8px}
   .stub .k{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:#ffd7c9}
   .stub .v{font-family:var(--serif);font-weight:700;color:#fff;font-size:1.05rem}
   .stub .pnr{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:#ffd7c9}
   .stub .pnrv{font-family:var(--serif);font-weight:800;font-size:1.5rem;letter-spacing:.14em;color:#fff}
+  .flight-tips{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
   /* two hotels */
   .hotels{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .hotel{background:var(--night2);border:1px solid rgba(126,163,224,.16);border-radius:18px;overflow:hidden}
+  .hotel{background:var(--night2);border:1px solid var(--line);border-radius:18px;overflow:hidden}
   .hotel .top{padding:20px 22px;position:relative;overflow:hidden}
   .hotel.tok .top{background:linear-gradient(120deg,#20306a,#2a4a94)}
   .hotel.kyo .top{background:linear-gradient(120deg,#7a2a2a,#c24b3a)}
@@ -150,28 +196,28 @@
   .hotel .top h4{font-family:var(--serif);font-weight:800;font-size:1.35rem;margin-top:4px;color:#fff}
   .hotel .top .em{position:absolute;right:12px;bottom:-6px;font-size:3.4rem;opacity:.3}
   .hotel .body{padding:18px 22px}
-  .hotel .kv{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed rgba(126,163,224,.18);font-size:.9rem}
+  .hotel .kv{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dashed rgba(126,163,224,.18);font-size:.9rem}
   .hotel .kv:last-child{border-bottom:0}
-  .hotel .kv span{color:var(--dim)}
+  .hotel .kv span{color:var(--dim);flex:none}
   .hotel .kv b{color:var(--paper);font-weight:700;text-align:right}
 
   /* transit cards */
   .transit{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .train{background:var(--night2);border:1px solid rgba(126,163,224,.16);border-radius:16px;padding:20px 22px;position:relative;overflow:hidden}
+  .train{background:var(--night2);border:1px solid var(--line);border-radius:16px;padding:20px 22px;position:relative;overflow:hidden}
   .train .tag{display:inline-block;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#0d1430;background:var(--lantern);padding:3px 10px;border-radius:20px}
   .train h4{font-family:var(--serif);font-weight:800;font-size:1.3rem;margin:10px 0 2px}
   .train .rt{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;margin-top:8px;font-size:1.05rem}
   .train .rt .a{color:var(--lantern)}
   .train .meta{color:var(--dim);font-size:.84rem;margin-top:8px}
-  .train .em{position:absolute;right:-4px;top:-4px;font-size:3rem;opacity:.16}
+  .train svg{position:absolute;right:14px;top:16px;width:74px;height:auto;opacity:.5}
   .tips{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .tip{background:rgba(77,120,201,.1);border:1px solid rgba(126,163,224,.18);border-radius:12px;padding:14px 16px;font-size:.88rem;color:var(--dim)}
   .tip b{color:var(--lantern-hot)}
 
   /* tickets grid */
   .tix{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  .ticket{background:linear-gradient(135deg,#182356,#111c44);border:1px solid rgba(126,163,224,.18);border-radius:16px;padding:0;overflow:hidden;display:flex}
-  .ticket .side{width:8px;background:var(--verm)}
+  .ticket{background:linear-gradient(135deg,#182356,#111c44);border:1px solid rgba(126,163,224,.18);border-radius:16px;overflow:hidden;display:flex}
+  .ticket .side{width:8px;background:var(--verm);flex:none}
   .ticket.blue .side{background:var(--ai)}
   .ticket.gold .side{background:var(--lantern)}
   .ticket .inner{padding:16px 18px;flex:1;position:relative}
@@ -182,11 +228,10 @@
   .ticket .ref{margin-top:8px;font-size:.72rem;color:var(--dim)}
   .ticket .ref b{font-family:var(--serif);letter-spacing:.06em;color:#fff}
 
-  /* ===== TIMELINE / DAYS ===== */
+  /* ===== DAY BY DAY ===== */
   .days{padding:64px 0}
-  .timeline{position:relative;padding-left:0}
   .day{position:relative;margin-bottom:22px}
-  .day-card{background:var(--night2);border:1px solid rgba(126,163,224,.16);border-radius:20px;overflow:hidden;
+  .day-card{background:var(--night2);border:1px solid var(--line);border-radius:20px;overflow:hidden;
     opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
   .day-card.in{opacity:1;transform:none}
   .day-head{display:flex;align-items:center;gap:16px;padding:18px 22px;position:relative;overflow:hidden}
@@ -194,25 +239,32 @@
   .day-head.kyoto{background:linear-gradient(110deg,#7a2727,#c1432f)}
   .day-head.travel{background:linear-gradient(110deg,#243a72,#3a2c5e)}
   .day-num{flex:none;width:56px;height:56px;border-radius:14px;background:rgba(0,0,0,.22);display:grid;place-items:center;text-align:center}
-  .day-num .d{font-family:var(--serif);font-weight:800;font-size:1.5rem;line-height:1;color:#fff}
+  .day-num .d{font-family:var(--serif);font-weight:800;font-size:1.5rem;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
   .day-num .k{font-size:.7rem;color:rgba(255,255,255,.7);margin-top:2px;font-family:var(--serif)}
   .day-head .meta{flex:1}
   .day-head .date{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75);font-weight:700}
   .day-head h3{font-family:var(--serif);font-weight:800;font-size:clamp(1.15rem,3vw,1.5rem);color:#fff;line-height:1.15}
-  .day-head .stamp{font-size:2.6rem;opacity:.9;flex:none}
-  .day-head .cityb{position:absolute;right:16px;bottom:10px;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:700}
+  .day-head .stamp{flex:none;width:54px;height:54px;border:2px solid rgba(255,255,255,.55);border-radius:50%;display:grid;place-items:center;
+    font-family:var(--serif);font-weight:800;font-size:1.15rem;color:rgba(255,255,255,.9);transform:rotate(8deg);letter-spacing:0}
+  .day-head .cityb{position:absolute;right:16px;bottom:8px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:700}
 
   .day-body{padding:6px 22px 20px}
   .sched{list-style:none;margin:10px 0 0}
   .sched li{display:grid;grid-template-columns:78px 1fr;gap:14px;padding:9px 0;border-bottom:1px dashed rgba(126,163,224,.14);align-items:baseline}
   .sched li:last-child{border-bottom:0}
-  .sched .t{font-family:var(--serif);font-weight:700;color:var(--lantern);font-size:.92rem;white-space:nowrap}
+  .sched .t{font-family:var(--serif);font-weight:700;color:var(--lantern);font-size:.92rem;white-space:nowrap;font-variant-numeric:tabular-nums}
   .sched .act{color:var(--paper);font-size:.95rem}
   .sched .act b{color:#fff}
   .sched .act .note{display:block;color:var(--dimmer);font-size:.82rem;margin-top:1px}
   .hl{margin-top:14px;background:rgba(246,177,60,.1);border:1px solid rgba(246,177,60,.28);border-radius:12px;padding:12px 15px;font-size:.9rem;color:var(--paper)}
   .hl b{color:var(--lantern-hot)}
   .hl .em{margin-right:6px}
+  .facts{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+  .fact{font-size:.78rem;color:var(--dim);background:rgba(77,120,201,.12);border:1px solid rgba(126,163,224,.2);border-radius:20px;padding:5px 12px}
+  .fact b{color:var(--ai-soft);font-weight:700}
+  .maplinks{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+  .maplink{font-size:.78rem;font-weight:700;color:var(--lantern-hot);border:1px solid rgba(246,177,60,.35);border-radius:20px;padding:5px 12px;display:inline-flex;align-items:center;gap:6px}
+  .maplink:hover{background:rgba(246,177,60,.12);text-decoration:none}
 
   /* festival spotlight */
   .spot{border-radius:22px;overflow:hidden;border:1px solid rgba(255,215,122,.25);
@@ -221,23 +273,52 @@
   .spot .lab{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;font-weight:700;color:var(--lantern)}
   .spot h3{font-family:var(--serif);font-weight:800;font-size:clamp(1.6rem,4.5vw,2.4rem);color:#fff;margin:6px 0 8px}
   .spot p.intro{color:#f2dfe0;max-width:66ch}
-  .fest-nights{padding:14px 30px 30px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
+  .fest-nights{padding:14px 30px 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
   .fnight{background:rgba(0,0,0,.28);border:1px solid rgba(255,215,122,.18);border-radius:14px;padding:16px}
   .fnight .n{font-size:2rem}
   .fnight .dt{font-family:var(--serif);font-weight:800;color:var(--lantern-hot);font-size:1.05rem;margin-top:6px}
   .fnight .nm{font-weight:700;color:#fff;font-size:.92rem;margin-top:2px}
   .fnight .ds{color:#e8cfd0;font-size:.8rem;margin-top:4px}
+  .fest-facts{padding:0 30px 30px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ffact{background:rgba(0,0,0,.22);border:1px solid rgba(255,215,122,.14);border-radius:12px;padding:14px 16px;font-size:.88rem;color:#f2dfe0}
+  .ffact b{color:var(--lantern-hot)}
 
-  /* food strip */
-  .food{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
-  .bite{background:var(--night2);border:1px solid rgba(126,163,224,.16);border-radius:16px;padding:18px 16px;text-align:center}
-  .bite .e{font-size:2.4rem}
+  /* food hunt — interactive */
+  .food{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .bite{background:var(--night2);border:1px solid var(--line);border-radius:16px;padding:18px 14px;text-align:center;
+    cursor:pointer;font-family:inherit;color:inherit;transition:transform .15s ease,border-color .2s ease;position:relative}
+  .bite:hover{transform:translateY(-3px);border-color:rgba(246,177,60,.45)}
+  .bite .e{font-size:2.4rem;display:block}
   .bite .nm{font-weight:700;margin-top:8px;font-size:.95rem}
   .bite .ds{color:var(--dim);font-size:.78rem;margin-top:2px}
+  .bite::after{content:"";position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;
+    border:2px solid rgba(126,163,224,.35);display:grid;place-items:center;font-size:.7rem}
+  .bite[aria-pressed="true"]{border-color:var(--lantern);background:rgba(246,177,60,.1)}
+  .bite[aria-pressed="true"]::after{content:"✓";color:#0d1430;background:var(--lantern);border-color:var(--lantern);line-height:16px;font-weight:900}
+  .bite[aria-pressed="true"] .nm{color:var(--lantern-hot)}
+  .hunt-score{margin-top:18px;text-align:center;color:var(--lantern);font-weight:700;letter-spacing:.1em;font-size:.9rem;font-variant-numeric:tabular-nums}
 
-  /* know before */
+  /* phrases */
+  .phrases{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+  .phrase{background:var(--night2);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .phrase .jpn{font-family:var(--serif);font-weight:700;font-size:1.15rem;color:#fff}
+  .phrase .rom{color:var(--lantern-hot);font-weight:700;font-size:.88rem;margin-top:2px;letter-spacing:.03em}
+  .phrase .en{color:var(--dim);font-size:.84rem;margin-top:4px}
+
+  /* money */
+  .money{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+  .yen-card{background:linear-gradient(135deg,#182356,#101a42);border:1px solid rgba(126,163,224,.2);border-radius:18px;padding:24px}
+  .yen-card h4{font-family:var(--serif);font-weight:800;font-size:1.25rem;margin-bottom:4px}
+  .yen-card .rate{color:var(--dim);font-size:.85rem;margin-bottom:14px}
+  .yen-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .yen{display:flex;justify-content:space-between;background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:.92rem;font-variant-numeric:tabular-nums}
+  .yen b{color:var(--lantern-hot)}
+  .yen span{color:var(--dim)}
+  .money-notes{display:grid;gap:12px;align-content:start}
+
+  /* know before / survival */
   .kb-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  .kb{background:var(--night2);border:1px solid rgba(126,163,224,.16);border-radius:16px;padding:22px 24px}
+  .kb{background:var(--night2);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
   .kb .e{font-size:1.8rem}
   .kb h4{font-family:var(--serif);font-weight:700;font-size:1.15rem;margin:8px 0 6px}
   .kb p{color:var(--dim);font-size:.92rem}
@@ -245,39 +326,64 @@
   .kb ul{list-style:none;margin-top:6px}
   .kb li{color:var(--dim);font-size:.9rem;padding:4px 0 4px 20px;position:relative}
   .kb li::before{content:"◦";position:absolute;left:4px;color:var(--lantern)}
+  .kb li b{color:var(--paper)}
+  .kb .packlist li{cursor:pointer;border-radius:6px}
+  .kb .packlist li:hover{color:var(--paper)}
+  .kb .packlist li[data-done="1"]{color:var(--dimmer);text-decoration:line-through}
+  .kb .packlist li[data-done="1"]::before{content:"✓";color:var(--lantern)}
+  .weather-strip{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .wx{background:rgba(77,120,201,.1);border:1px solid rgba(126,163,224,.2);border-radius:14px;padding:16px 18px}
+  .wx .city{font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:.74rem;color:var(--ai-soft)}
+  .wx .temp{font-family:var(--serif);font-weight:800;font-size:1.7rem;color:#fff;margin-top:2px}
+  .wx .det{color:var(--dim);font-size:.8rem;margin-top:4px}
 
   /* footer */
   footer{padding:60px 0 80px;text-align:center;background:linear-gradient(180deg,#0d1430,#080b1a)}
   footer .kanji{font-family:var(--serif);font-size:2.4rem;color:var(--verm);font-weight:800;letter-spacing:.2em}
   footer h3{font-family:var(--serif);font-weight:800;font-size:1.6rem;margin:10px 0 6px;color:#fff}
   footer p{color:var(--dimmer);font-size:.9rem}
-  footer .mini-count{margin-top:18px;color:var(--lantern);font-weight:700;letter-spacing:.1em}
+  footer .mini-count{margin-top:18px;color:var(--lantern);font-weight:700;letter-spacing:.1em;font-variant-numeric:tabular-nums}
 
   @media(max-width:820px){
     .stats{grid-template-columns:repeat(2,1fr)}
     .crew-grid{grid-template-columns:1fr}
     .pass{grid-template-columns:1fr}
     .pass .stub::before{display:none}
-    .hotels,.transit,.tix,.kb-grid{grid-template-columns:1fr}
+    .hotels,.transit,.tix,.kb-grid,.fest-facts,.money,.flight-tips{grid-template-columns:1fr}
     .tips{grid-template-columns:1fr}
     .fest-nights{grid-template-columns:1fr 1fr}
     .leg .port{font-size:1.6rem}
+    .weather-strip{grid-template-columns:1fr}
   }
   @media(max-width:480px){
     .fest-nights{grid-template-columns:1fr}
     .sched li{grid-template-columns:64px 1fr;gap:10px}
     .day-head .stamp{display:none}
+    .yen-grid{grid-template-columns:1fr}
   }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
     .day-card{opacity:1;transform:none}
+    html{scroll-behavior:auto}
   }
 </style>
 </head>
 <body>
 
+<!-- ===================== NAV ===================== -->
+<nav class="topnav" id="topnav" aria-label="Sections">
+  <a class="brand" href="#top">日本 2026</a>
+  <a href="#plan">Day by day</a>
+  <a href="#tickets">Tickets</a>
+  <a href="#festival">Festival</a>
+  <a href="#food">Food hunt</a>
+  <a href="#money">Money</a>
+  <a href="#phrases">Phrases</a>
+  <a href="#survival">Survival kit</a>
+</nav>
+
 <!-- ===================== HERO ===================== -->
-<header class="hero">
+<header class="hero" id="top">
   <div class="stars" id="stars"></div>
   <div class="lanterns">
     <div class="lstring" style="--h:40px"><div class="lantern"><span></span><small></small></div></div>
@@ -286,7 +392,7 @@
     <div class="lstring big" style="--h:64px"><div class="lantern"><span></span><small></small></div></div>
     <div class="lstring" style="--h:44px"><div class="lantern"><span></span><small></small></div></div>
   </div>
-  <div class="wrap hero-inner">
+  <div class="hero-inner">
     <div class="kanji">日本</div>
     <h1>JAPAN</h1>
     <div class="dates">9 – 19 July · 2026</div>
@@ -301,6 +407,58 @@
     <div class="count-label" id="countLabel">until wheels up ✈</div>
     <div class="scrollcue">scroll for the whole plan ↓</div>
   </div>
+
+  <!-- night horizon: moon, Fuji, torii, pagoda -->
+  <div class="horizon" aria-hidden="true">
+    <svg viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax slice" role="presentation">
+      <defs>
+        <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ffd77a" stop-opacity=".55"/>
+          <stop offset="45%" stop-color="#ffd77a" stop-opacity=".12"/>
+          <stop offset="100%" stop-color="#ffd77a" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="ridgeA" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a2450"/><stop offset="100%" stop-color="#111938"/>
+        </linearGradient>
+        <linearGradient id="ridgeB" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#10173a"/><stop offset="100%" stop-color="#0a0f26"/>
+        </linearGradient>
+      </defs>
+      <!-- moon -->
+      <circle cx="1150" cy="70" r="120" fill="url(#moonGlow)"/>
+      <circle cx="1150" cy="70" r="34" fill="#ffe9b8"/>
+      <circle cx="1138" cy="62" r="6" fill="#f2d391" opacity=".7"/>
+      <circle cx="1162" cy="80" r="4" fill="#f2d391" opacity=".6"/>
+      <!-- far ridge + Fuji -->
+      <path d="M0,210 L240,168 L420,196 L560,150 L660,182 L720,130 L610,300 L830,130 L790,182 L900,158 L1080,196 L1260,162 L1440,200 L1440,300 L0,300 Z" fill="url(#ridgeA)"/>
+      <!-- Fuji cone -->
+      <path d="M560,300 L720,96 L880,300 Z" fill="#1c2854"/>
+      <path d="M720,96 L757,143 L745,153 L733,145 L721,155 L709,145 L697,153 L683,143 Z" fill="#e9edfa" opacity=".92"/>
+      <!-- near ridge -->
+      <path d="M0,252 L180,224 L340,248 L520,220 L700,252 L900,226 L1100,254 L1280,232 L1440,250 L1440,300 L0,300 Z" fill="url(#ridgeB)"/>
+      <!-- pagoda silhouette (left) -->
+      <g fill="#080d20">
+        <rect x="176" y="236" width="48" height="10" rx="3"/>
+        <rect x="188" y="222" width="24" height="16"/>
+        <rect x="170" y="214" width="60" height="10" rx="3"/>
+        <rect x="186" y="200" width="28" height="16"/>
+        <rect x="176" y="192" width="48" height="9" rx="3"/>
+        <rect x="192" y="178" width="16" height="16"/>
+        <rect x="182" y="171" width="36" height="8" rx="3"/>
+        <rect x="198" y="152" width="4" height="20"/>
+      </g>
+      <!-- torii silhouette (right, on near ridge) -->
+      <g fill="#150a12">
+        <rect x="1042" y="196" width="10" height="60" transform="skewX(-2)"/>
+        <rect x="1106" y="196" width="10" height="60" transform="skewX(2)"/>
+        <rect x="1030" y="206" width="98" height="8" rx="2"/>
+        <rect x="1024" y="186" width="112" height="12" rx="4"/>
+        <rect x="1074" y="198" width="8" height="10"/>
+      </g>
+      <!-- water reflection line -->
+      <rect x="0" y="296" width="1440" height="4" fill="#080b1a"/>
+    </svg>
+  </div>
 </header>
 
 <!-- ===================== AT A GLANCE ===================== -->
@@ -308,34 +466,90 @@
   <div class="wrap">
     <div class="stats">
       <div class="stat"><div class="big">11</div><div class="cap">Days away</div></div>
-      <div class="stat"><div class="big">2</div><div class="cap">Cities</div></div>
+      <div class="stat"><div class="big">4</div><div class="cap">Cities (+ Nara &amp; Yokohama)</div></div>
       <div class="stat"><div class="big">9</div><div class="cap">Nights in Japan</div></div>
       <div class="stat"><div class="big">∞</div><div class="cap">Memories</div></div>
     </div>
     <div class="banner">
       <div class="lab">The reason we picked these dates</div>
       <h3>Gion Matsuri — Japan's biggest festival</h3>
-      <p>Our five nights in Kyoto land right on the peak of a 1,100-year-old festival. Giant lantern-lit floats, thousands of people, street food everywhere, and a huge parade of 12-ton floats being hand-pulled through the city. This is the heart of the trip.</p>
+      <p>Our five nights in Kyoto land right on the peak of a festival that has run since the year 869. Giant lantern-lit floats built without a single nail, streets closed to traffic and filled with food stalls, and a huge parade of 12-ton floats hand-pulled through the city. This is the heart of the trip.</p>
       <div class="emoji">🏮</div>
     </div>
   </div>
 </section>
 
-<!-- ===================== THE CREW ===================== -->
+<!-- ===================== ROUTE MAP ===================== -->
 <section class="block">
+  <div class="wrap">
+    <div class="eyebrow">The route <span class="jp">道のり</span></div>
+    <h2 class="sec">One line, whole trip</h2>
+    <p class="sec-sub">Across the Pacific, four days in Tokyo, the bullet train south, five days in Kyoto — with side quests to Yokohama and Nara.</p>
+    <div class="routemap">
+      <svg viewBox="0 0 960 250" role="img" aria-label="Trip route: Seattle to Tokyo by plane, Yokohama day trip, bullet train to Kyoto, Nara day trip, then home from Tokyo">
+        <defs>
+          <linearGradient id="flightArc" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7ea3e0"/><stop offset="100%" stop-color="#f6b13c"/>
+          </linearGradient>
+        </defs>
+        <!-- flight arc -->
+        <path d="M60,120 Q300,14 560,104" fill="none" stroke="url(#flightArc)" stroke-width="2.5" stroke-dasharray="1 7" stroke-linecap="round"/>
+        <text x="285" y="42" text-anchor="middle" class="leglab">ANA NH117 · nonstop · 10h 30m ✈</text>
+        <!-- return arc (faint) -->
+        <path d="M560,124 Q300,236 60,140" fill="none" stroke="#4d78c9" stroke-width="1.5" stroke-dasharray="1 8" stroke-linecap="round" opacity=".4"/>
+        <text x="285" y="216" text-anchor="middle" class="leglab" opacity=".65">NH118 home · Jul 19 · land the same day 🌏</text>
+        <!-- Seattle -->
+        <circle cx="60" cy="130" r="9" fill="none" stroke="#7ea3e0" stroke-width="2.5"/>
+        <circle cx="60" cy="130" r="3.5" fill="#7ea3e0"/>
+        <text x="60" y="163" text-anchor="middle" class="st-name">Seattle</text>
+        <text x="60" y="178" text-anchor="middle" class="st-days">Jul 9 · SEA</text>
+        <!-- rail line Tokyo -> Kyoto -->
+        <path d="M560,114 L880,114" stroke="#ec5540" stroke-width="4" stroke-linecap="round"/>
+        <text x="720" y="100" text-anchor="middle" class="leglab">Nozomi shinkansen · 2h 15m · 285 km/h 🚄</text>
+        <!-- Tokyo -->
+        <circle cx="560" cy="114" r="10" fill="#0d1430" stroke="#f6b13c" stroke-width="3"/>
+        <text x="560" y="88" text-anchor="middle" class="st-kanji">東京</text>
+        <text x="560" y="147" text-anchor="middle" class="st-name">Tokyo</text>
+        <text x="560" y="162" text-anchor="middle" class="st-days">Days 2–5</text>
+        <!-- Yokohama spur -->
+        <path d="M560,114 L560,114 M560,120 Q590,168 636,182" fill="none" stroke="#4d78c9" stroke-width="2" stroke-dasharray="4 5"/>
+        <circle cx="642" cy="184" r="6" fill="#0d1430" stroke="#7ea3e0" stroke-width="2"/>
+        <text x="642" y="212" text-anchor="middle" class="st-kanji" font-size="14">横浜</text>
+        <text x="642" y="228" text-anchor="middle" class="st-days">Yokohama · Day 5</text>
+        <!-- Kyoto -->
+        <circle cx="880" cy="114" r="10" fill="#0d1430" stroke="#ec5540" stroke-width="3"/>
+        <text x="880" y="88" text-anchor="middle" class="st-kanji">京都</text>
+        <text x="880" y="147" text-anchor="middle" class="st-name">Kyoto</text>
+        <text x="880" y="162" text-anchor="middle" class="st-days">Days 6–10</text>
+        <!-- Nara spur -->
+        <path d="M880,120 Q874,176 850,196" fill="none" stroke="#c1432f" stroke-width="2" stroke-dasharray="4 5"/>
+        <circle cx="846" cy="200" r="6" fill="#0d1430" stroke="#ec5540" stroke-width="2"/>
+        <text x="846" y="226" text-anchor="middle" class="st-kanji" font-size="14">奈良</text>
+        <text x="846" y="242" text-anchor="middle" class="st-days">Nara · Day 8</text>
+      </svg>
+      <div class="map-note">Not to scale — but the excitement is.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== THE CREW ===================== -->
+<section class="block alt">
   <div class="wrap">
     <div class="eyebrow">The crew <span class="jp">仲間</span></div>
     <h2 class="sec">Who's going</h2>
     <div class="crew-grid">
-      <div class="person"><div class="av">🧳</div><h4>Papa</h4><div class="role">Chief planner &amp; navigator</div></div>
-      <div class="person"><div class="av">📸</div><h4>Anastasiya</h4><div class="role">17 · photos &amp; vibes</div></div>
-      <div class="person"><div class="av">🍡</div><h4>Vlada</h4><div class="role">13 · snacks &amp; adventures</div></div>
+      <div class="person"><div class="av">🧳</div><h4>Papa</h4><div class="role">Chief planner &amp; navigator</div>
+        <div class="quest">Trip quest: find the perfect bowl of ramen</div></div>
+      <div class="person"><div class="av">📸</div><h4>Anastasiya</h4><div class="role">17 · photos &amp; vibes</div>
+        <div class="quest">Trip quest: golden-hour shot at Fushimi Inari</div></div>
+      <div class="person"><div class="av">🍡</div><h4>Vlada</h4><div class="role">13 · snacks &amp; adventures</div>
+        <div class="quest">Trip quest: get a deer to bow back in Nara</div></div>
     </div>
   </div>
 </section>
 
 <!-- ===================== FLIGHTS ===================== -->
-<section class="block alt">
+<section class="block">
   <div class="wrap">
     <div class="eyebrow">Getting there &amp; back <span class="jp">空の便</span></div>
     <h2 class="sec">Our flights</h2>
@@ -361,11 +575,15 @@
         <div><div class="pnr">Booking code</div><div class="pnrv">DSVY7Z</div></div>
       </div>
     </div>
+    <div class="flight-tips">
+      <div class="tip"><b>Before we board:</b> everyone registers on <a href="https://www.vjw.digital.go.jp/" rel="noopener">Visit Japan Web</a> — one QR code covers immigration <i>and</i> customs, and Haneda's joint kiosks scan it in seconds instead of paper forms.</div>
+      <div class="tip"><b>Jet-lag plan:</b> sleep no more than ~4 hours on the flight, set watches to Tokyo time at takeoff, and start eating on the new clock. Landing at 7 PM makes this the easy direction.</div>
+    </div>
   </div>
 </section>
 
 <!-- ===================== HOTELS ===================== -->
-<section class="block">
+<section class="block alt">
   <div class="wrap">
     <div class="eyebrow">Home base <span class="jp">宿</span></div>
     <h2 class="sec">Where we're staying</h2>
@@ -396,21 +614,21 @@
 </section>
 
 <!-- ===================== TRAINS ===================== -->
-<section class="block alt">
+<section class="block">
   <div class="wrap">
     <div class="eyebrow">Between cities <span class="jp">新幹線</span></div>
     <h2 class="sec">Bullet train days</h2>
-    <p class="sec-sub">The Nozomi shinkansen hits ~285 km/h. Watch the right-hand window on the way to Kyoto — Mt. Fuji shows up around the one-hour mark if the sky is clear.</p>
+    <p class="sec-sub">The Nozomi shinkansen cruises at ~285 km/h and covers Tokyo → Kyoto faster than Seattle → Portland by car. Watch the right-hand window — Mt. Fuji fills it about 40 minutes in if the sky is clear.</p>
     <div class="transit">
       <div class="train">
-        <div class="em">🚄</div>
+        <svg viewBox="0 0 90 34" aria-hidden="true"><path d="M4,26 L10,12 Q13,6 24,6 L86,6 L86,26 Z" fill="#e9edfa"/><rect x="30" y="11" width="12" height="7" rx="2" fill="#233a72"/><rect x="48" y="11" width="12" height="7" rx="2" fill="#233a72"/><rect x="66" y="11" width="12" height="7" rx="2" fill="#233a72"/><path d="M4,26 L10,12 Q13,6 24,6 L30,6 L16,26 Z" fill="#4d78c9"/><rect x="4" y="24" width="82" height="3" fill="#233a72"/></svg>
         <span class="tag">Tue Jul 14</span>
         <h4>Nozomi 243</h4>
         <div class="rt">Tokyo <span class="a">→</span> Kyoto</div>
-        <div class="meta">Depart 9:00 · Arrive 11:15 · 2h 15m · Green Car · look right for Fuji 🗻</div>
+        <div class="meta">Depart 9:00 · Arrive 11:15 · 2h 15m · Green Car · sit on the right for Fuji 🗻</div>
       </div>
       <div class="train">
-        <div class="em">🚄</div>
+        <svg viewBox="0 0 90 34" aria-hidden="true"><path d="M86,26 L80,12 Q77,6 66,6 L4,6 L4,26 Z" fill="#e9edfa"/><rect x="48" y="11" width="12" height="7" rx="2" fill="#233a72"/><rect x="30" y="11" width="12" height="7" rx="2" fill="#233a72"/><rect x="12" y="11" width="12" height="7" rx="2" fill="#233a72"/><path d="M86,26 L80,12 Q77,6 66,6 L60,6 L74,26 Z" fill="#4d78c9"/><rect x="4" y="24" width="82" height="3" fill="#233a72"/></svg>
         <span class="tag">Sun Jul 19</span>
         <h4>Nozomi 12</h4>
         <div class="rt">Kyoto <span class="a">→</span> Tokyo</div>
@@ -418,14 +636,16 @@
       </div>
     </div>
     <div class="tips">
-      <div class="tip"><b>Suica</b> — one tap card for all city trains &amp; convenience stores. Load it on the phone.</div>
-      <div class="tip"><b>Yamato luggage</b> — we ship the big suitcases Tokyo → Kyoto so we don't drag them on the train.</div>
+      <div class="tip"><b>Suica</b> — one tap card for every city train, bus and convenience store. Add it to Apple/Google Wallet in five minutes; top up with our Visa right from the phone. No paper tickets all trip.</div>
+      <div class="tip"><b>Yamato "ta-Q-bin"</b> — we ship the big suitcases hotel-to-hotel Tokyo → Kyoto (~¥2,500 a bag, arrives next day) so the train day is just day-packs. Hotel front desk handles it.</div>
+      <div class="tip"><b>Ekiben</b> — the famous train bento boxes. We grab them at Tokyo Station before boarding; eating one as Fuji rolls past is a Japanese rite of passage. 🍱</div>
+      <div class="tip"><b>Seat note</b> — Green Car = first class: 2+2 seats, big recline, quiet. Our bags fit overhead; that's why the big ones travel separately.</div>
     </div>
   </div>
 </section>
 
 <!-- ===================== ALL OUR TICKETS ===================== -->
-<section class="block">
+<section class="block alt" id="tickets">
   <div class="wrap">
     <div class="eyebrow">Booked &amp; locked in <span class="jp">予約済み</span></div>
     <h2 class="sec">Every ticket, in one place</h2>
@@ -444,11 +664,11 @@
 </section>
 
 <!-- ===================== DAY BY DAY ===================== -->
-<section class="days">
+<section class="days" id="plan">
   <div class="wrap">
     <div class="eyebrow">The whole plan <span class="jp">旅程</span></div>
     <h2 class="sec">Day by day</h2>
-    <p class="sec-sub">Times are a guide, not a rulebook — but this is the shape of each day.</p>
+    <p class="sec-sub">Times are a guide, not a rulebook — but this is the shape of each day. Tap the map pins to open any spot in Google Maps.</p>
 
     <div class="timeline">
 
@@ -457,14 +677,18 @@
         <div class="day-head travel">
           <div class="day-num"><div class="d">1</div><div class="k">木</div></div>
           <div class="meta"><div class="date">Thu · July 9</div><h3>Fly out of Seattle</h3></div>
-          <div class="stamp">✈️</div><div class="cityb">In transit</div>
+          <div class="stamp">出発</div><div class="cityb">In transit</div>
         </div>
         <div class="day-body">
           <ul class="sched">
-            <li><span class="t">12:00</span><span class="act">Finish packing, taxi to <b>SEA</b></span></li>
+            <li><span class="t">12:00</span><span class="act">Finish packing, taxi to <b>SEA</b><span class="note">Passports ×3 · Visit Japan Web QR codes saved to phones</span></span></li>
             <li><span class="t">14:00</span><span class="act">At the airport — check in early for an international flight</span></li>
-            <li><span class="t">16:30</span><span class="act"><b>ANA NH117</b> takes off ✈️<span class="note">Tip: don't sleep more than ~4 hours, and start eating on Tokyo time</span></span></li>
+            <li><span class="t">16:30</span><span class="act"><b>ANA NH117</b> takes off ✈️<span class="note">Don't sleep more than ~4 hours, and start eating on Tokyo time</span></span></li>
           </ul>
+          <div class="facts">
+            <div class="fact">We cross the <b>date line</b> — Friday disappears mid-flight</div>
+            <div class="fact">ANA seat-back: 100+ movies + a tail camera 🎥</div>
+          </div>
         </div>
       </div></div>
 
@@ -473,16 +697,20 @@
         <div class="day-head tokyo">
           <div class="day-num"><div class="d">2</div><div class="k">金</div></div>
           <div class="meta"><div class="date">Fri · July 10</div><h3>Land in Tokyo</h3></div>
-          <div class="stamp">🛬</div><div class="cityb">Tokyo</div>
+          <div class="stamp">東京</div><div class="cityb">Tokyo</div>
         </div>
         <div class="day-body">
           <ul class="sched">
-            <li><span class="t">19:00</span><span class="act">Touch down at <b>Haneda</b> (Terminal 3)</span></li>
-            <li><span class="t">19:30</span><span class="act">Immigration, bags, grab cash &amp; a data SIM</span></li>
+            <li><span class="t">19:00</span><span class="act">Touch down at <b>Haneda</b> (Terminal 3)<span class="note">Joint kiosk: scan passport + Visit Japan Web QR once — immigration and customs done together</span></span></li>
+            <li><span class="t">19:40</span><span class="act">Bags, then yen from the <b>7-Eleven ATM</b> in arrivals — eSIMs already active</span></li>
             <li><span class="t">21:00</span><span class="act">Check into <b>Mimaru Shinjuku West</b></span></li>
-            <li><span class="t">21:30</span><span class="act">Easy first dinner nearby — ramen or tonkatsu 🍜</span></li>
+            <li><span class="t">21:30</span><span class="act">Easy first dinner nearby — ramen or tonkatsu 🍜<span class="note">Backup plan: a konbini feast — onigiri, egg sandos &amp; melon soda from 7-Eleven</span></span></li>
             <li><span class="t">23:00</span><span class="act">Sleep! Beat the jet lag.</span></li>
           </ul>
+          <div class="maplinks">
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Mimaru+Tokyo+Shinjuku+West" rel="noopener">📍 Mimaru Shinjuku West</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Haneda+Airport+Terminal+3" rel="noopener">📍 Haneda T3</a>
+          </div>
         </div>
       </div></div>
 
@@ -491,18 +719,23 @@
         <div class="day-head tokyo">
           <div class="day-num"><div class="d">3</div><div class="k">土</div></div>
           <div class="meta"><div class="date">Sat · July 11</div><h3>Old Tokyo meets neon Tokyo</h3></div>
-          <div class="stamp">🏯</div><div class="cityb">Tokyo</div>
+          <div class="stamp">浅草</div><div class="cityb">Tokyo</div>
         </div>
         <div class="day-body">
           <ul class="sched">
-            <li><span class="t">9:00</span><span class="act"><b>Senso-ji</b> temple in Asakusa — get there early, no crowds ⛩️</span></li>
-            <li><span class="t">10:30</span><span class="act">Nakamise street — souvenirs &amp; snacks</span></li>
-            <li><span class="t">11:30</span><span class="act"><b>Tokyo Skytree</b> — up the tower for the view</span></li>
+            <li><span class="t">9:00</span><span class="act"><b>Senso-ji</b> temple in Asakusa — get there early, no crowds ⛩️<span class="note">Tokyo's oldest temple (founded 628) — walk in under the giant red Kaminarimon lantern</span></span></li>
+            <li><span class="t">10:30</span><span class="act"><b>Nakamise-dori</b> — 250 m of snack &amp; souvenir stalls leading to the temple<span class="note">Try age-manju (fried sweet buns) and fresh senbei crackers</span></span></li>
+            <li><span class="t">11:30</span><span class="act"><b>Tokyo Skytree</b> — up the tower for the view<span class="note">634 m — the tallest tower on Earth; decks at 350 m and 450 m</span></span></li>
             <li><span class="t">13:30</span><span class="act"><b>Akihabara</b> — anime, games, gachapon, Don Quijote 🎮</span></li>
-            <li><span class="t">17:30</span><span class="act"><b>Shibuya Crossing</b> + Hachiko statue</span></li>
+            <li><span class="t">17:30</span><span class="act"><b>Shibuya Crossing</b> + Hachiko statue<span class="note">Up to ~3,000 people cross on a single green light — watch one wave from the Starbucks window first</span></span></li>
             <li><span class="t">19:00</span><span class="act">Dinner in Shibuya</span></li>
           </ul>
-          <div class="hl"><span class="em">💡</span><b>Anastasiya:</b> Harajuku &amp; Cat Street are right here for shopping. <b>Vlada:</b> Akihabara has the gachapon hall — hundreds of capsule machines.</div>
+          <div class="hl"><span class="em">💡</span><b>Anastasiya:</b> Harajuku &amp; Cat Street are right here for shopping. <b>Vlada:</b> Akihabara has whole floors of gachapon — hundreds of capsule machines. Bring ¥100 coins.</div>
+          <div class="maplinks">
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Sensoji+Temple+Asakusa" rel="noopener">📍 Senso-ji</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Tokyo+Skytree" rel="noopener">📍 Skytree</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Shibuya+Scramble+Crossing" rel="noopener">📍 Shibuya Crossing</a>
+          </div>
         </div>
       </div></div>
 
@@ -511,17 +744,22 @@
         <div class="day-head tokyo">
           <div class="day-num"><div class="d">4</div><div class="k">日</div></div>
           <div class="meta"><div class="date">Sun · July 12</div><h3>Art, haircuts &amp; the night skyline</h3></div>
-          <div class="stamp">🎨</div><div class="cityb">Tokyo</div>
+          <div class="stamp">光</div><div class="cityb">Tokyo</div>
         </div>
         <div class="day-body">
           <ul class="sched">
-            <li><span class="t">9:00</span><span class="act"><b>teamLab Planets</b> — walk barefoot through water &amp; light 💧<span class="note">Wear shorts — no long pants or skirts (mirror floors!)</span></span></li>
-            <li><span class="t">12:00</span><span class="act">Fresh sushi at Toyosu Market 🍣</span></li>
+            <li><span class="t">9:00</span><span class="act"><b>teamLab Planets</b> — walk barefoot through water &amp; light 💧<span class="note">Wear shorts (knee-deep water + mirror floors) · free lockers for shoes &amp; bags · bring a small towel for your feet · budget ~2 hours — it doubled in size in 2026 with the new Athletic Forest</span></span></li>
+            <li><span class="t">12:00</span><span class="act">Fresh sushi at <b>Toyosu Market</b> 🍣 — 10 minutes away, straight from the world's biggest fish market</span></li>
             <li><span class="t">14:00</span><span class="act"><b>Girls:</b> haircuts at Assort · <b>Papa:</b> shopping in Aoyama</span></li>
             <li><span class="t">16:30</span><span class="act">Meet up — Harajuku &amp; Omotesando</span></li>
             <li><span class="t">18:00</span><span class="act">Dinner</span></li>
-            <li><span class="t">20:00</span><span class="act"><b>Tokyo City View</b> (Roppongi) — night skyline 🌃<span class="note">Tokyo Tower lit up below you</span></span></li>
+            <li><span class="t">20:00</span><span class="act"><b>Tokyo City View</b> (Roppongi) — night skyline 🌃<span class="note">52nd floor, Tokyo Tower lit up below us — sunset is 19:00, so we arrive to full night sparkle</span></span></li>
           </ul>
+          <div class="maplinks">
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=teamLab+Planets+TOKYO" rel="noopener">📍 teamLab Planets</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Toyosu+Market" rel="noopener">📍 Toyosu Market</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Tokyo+City+View+Roppongi+Hills" rel="noopener">📍 Tokyo City View</a>
+          </div>
         </div>
       </div></div>
 
@@ -530,17 +768,21 @@
         <div class="day-head tokyo">
           <div class="day-num"><div class="d">5</div><div class="k">月</div></div>
           <div class="meta"><div class="date">Mon · July 13</div><h3>Day trip to Yokohama</h3></div>
-          <div class="stamp">🍜</div><div class="cityb">Yokohama</div>
+          <div class="stamp">横浜</div><div class="cityb">Yokohama</div>
         </div>
         <div class="day-body">
           <ul class="sched">
             <li><span class="t">10:00</span><span class="act">Train to <b>Yokohama</b> (35 min)</span></li>
-            <li><span class="t">10:30</span><span class="act"><b>Cup Noodle Museum</b> — design &amp; make your own cup noodle! 🍜</span></li>
-            <li><span class="t">13:00</span><span class="act"><b>Chinatown</b> — biggest in Japan, street food galore</span></li>
-            <li><span class="t">14:30</span><span class="act">Minato Mirai harbor + the sky cable car</span></li>
+            <li><span class="t">10:30</span><span class="act"><b>Cup Noodle Museum</b> — design &amp; make your own cup noodle! 🍜<span class="note">¥500 entry (kids free) + ¥500 per custom cup · you draw the cup, pick 1 of 4 soups + 4 of 12 toppings · grab factory tickets right at opening</span></span></li>
+            <li><span class="t">13:00</span><span class="act"><b>Chinatown</b> — Japan's biggest, 600+ shops of street food</span></li>
+            <li><span class="t">14:30</span><span class="act">Minato Mirai harbor + the <b>Air Cabin</b> sky cable car over the water</span></li>
             <li><span class="t">18:00</span><span class="act">Back to Tokyo</span></li>
           </ul>
-          <div class="hl"><span class="em">🧳</span><b>Tonight:</b> pack the big suitcases — we ship them ahead to Kyoto so tomorrow's train is easy.</div>
+          <div class="hl"><span class="em">🧳</span><b>Tonight:</b> pack the big suitcases — Yamato ships them ahead to the Kyoto hotel so tomorrow's train is day-packs only.</div>
+          <div class="maplinks">
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Cup+Noodles+Museum+Yokohama" rel="noopener">📍 Cup Noodle Museum</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Yokohama+Chinatown" rel="noopener">📍 Chinatown</a>
+          </div>
         </div>
       </div></div>
 
@@ -549,16 +791,25 @@
         <div class="day-head kyoto">
           <div class="day-num"><div class="d">6</div><div class="k">火</div></div>
           <div class="meta"><div class="date">Tue · July 14</div><h3>Bullet train to Kyoto + first festival night</h3></div>
-          <div class="stamp">🦊</div><div class="cityb">Kyoto</div>
+          <div class="stamp">京都</div><div class="cityb">Kyoto</div>
         </div>
         <div class="day-body">
           <ul class="sched">
-            <li><span class="t">9:00</span><span class="act"><b>Nozomi 243</b> Tokyo → Kyoto 🚄<span class="note">Watch the right window for Mt. Fuji</span></span></li>
-            <li><span class="t">11:15</span><span class="act">Arrive Kyoto, drop bags, lunch at Nishiki Market</span></li>
-            <li><span class="t">14:00</span><span class="act"><b>Fushimi Inari</b> — the thousands of orange torii gates 🦊⛩️</span></li>
+            <li><span class="t">9:00</span><span class="act"><b>Nozomi 243</b> Tokyo → Kyoto 🚄<span class="note">Ekiben breakfast on board · right-hand window ~40 min in for Mt. Fuji</span></span></li>
+            <li><span class="t">11:15</span><span class="act">Arrive Kyoto, drop bags, lunch at <b>Nishiki Market</b><span class="note">"Kyoto's kitchen" — a 400-year-old covered food street, 5 min from the hotel</span></span></li>
+            <li><span class="t">14:00</span><span class="act"><b>Fushimi Inari</b> — the mountain of vermilion torii gates 🦊⛩️<span class="note">~10,000 gates · free, open 24/7 · climb to the Yotsutsuji viewpoint (~45 min) for the city view</span></span></li>
             <li><span class="t">17:00</span><span class="act">Check in, shower, rest</span></li>
             <li><span class="t">20:00</span><span class="act"><b>Yoi-yoi-yoiyama</b> — first festival street night, food stalls &amp; lantern floats 🏮</span></li>
           </ul>
+          <div class="facts">
+            <div class="fact">The fox is <b>Inari's messenger</b> — spot the key in its mouth</div>
+            <div class="fact">Each torii gate was donated — names carved on the back</div>
+          </div>
+          <div class="maplinks">
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Fushimi+Inari+Taisha" rel="noopener">📍 Fushimi Inari</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Nishiki+Market+Kyoto" rel="noopener">📍 Nishiki Market</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Cross+Hotel+Kyoto" rel="noopener">📍 Cross Hotel</a>
+          </div>
         </div>
       </div></div>
 
@@ -567,16 +818,22 @@
         <div class="day-head kyoto">
           <div class="day-num"><div class="d">7</div><div class="k">水</div></div>
           <div class="meta"><div class="date">Wed · July 15</div><h3>Bamboo, monkeys &amp; gold</h3></div>
-          <div class="stamp">🎋</div><div class="cityb">Kyoto</div>
+          <div class="stamp">嵐山</div><div class="cityb">Kyoto</div>
         </div>
         <div class="day-body">
           <ul class="sched">
-            <li><span class="t">9:00</span><span class="act"><b>Arashiyama Bamboo Grove</b> — go early before the heat 🎋</span></li>
-            <li><span class="t">10:30</span><span class="act">Monkey park on the hill + Tenryu-ji temple 🐒</span></li>
-            <li><span class="t">14:00</span><span class="act"><b>Kinkaku-ji</b> — the Golden Pavilion ✨</span></li>
+            <li><span class="t">8:00</span><span class="act"><b>Arashiyama Bamboo Grove</b> — before the crowds &amp; the heat 🎋<span class="note">Early morning is when you can actually hear the bamboo creak and rustle — the sound is listed as a national soundscape</span></span></li>
+            <li><span class="t">9:30</span><span class="act"><b>Iwatayama Monkey Park</b> — 120 wild macaques + the best view in Kyoto 🐒<span class="note">15-min hill hike up · here the monkeys roam free and the humans go in the cage to feed them</span></span></li>
+            <li><span class="t">11:30</span><span class="act"><b>Tenryu-ji</b> — UNESCO zen garden, then lunch by the river</span></li>
+            <li><span class="t">14:00</span><span class="act"><b>Kinkaku-ji</b> — the Golden Pavilion ✨<span class="note">Top two floors wrapped in real gold leaf, floating over its mirror pond</span></span></li>
             <li><span class="t">16:00</span><span class="act">Rest at the hotel</span></li>
             <li><span class="t">19:00</span><span class="act"><b>Yoi-yoiyama</b> — festival night #2, even busier 🏮</span></li>
           </ul>
+          <div class="maplinks">
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Arashiyama+Bamboo+Grove" rel="noopener">📍 Bamboo Grove</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Iwatayama+Monkey+Park" rel="noopener">📍 Monkey Park</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Kinkakuji+Golden+Pavilion" rel="noopener">📍 Kinkaku-ji</a>
+          </div>
         </div>
       </div></div>
 
@@ -585,17 +842,22 @@
         <div class="day-head kyoto">
           <div class="day-num"><div class="d">8</div><div class="k">木</div></div>
           <div class="meta"><div class="date">Thu · July 16</div><h3>Deer in Nara + the BIG festival night</h3></div>
-          <div class="stamp">🦌</div><div class="cityb">Nara → Kyoto</div>
+          <div class="stamp">奈良</div><div class="cityb">Nara → Kyoto</div>
         </div>
         <div class="day-body">
           <ul class="sched">
-            <li><span class="t">7:50</span><span class="act">Train to <b>Nara</b> (45 min)</span></li>
-            <li><span class="t">9:00</span><span class="act"><b>Todai-ji</b> — giant bronze Buddha + squeeze through the lucky pillar hole</span></li>
-            <li><span class="t">11:00</span><span class="act"><b>Deer Park</b> — 1,000+ wild deer that BOW for crackers 🦌<span class="note">Hide the crackers till you're ready — they get pushy!</span></span></li>
-            <li><span class="t">13:00</span><span class="act">Mochi-pounding show + lunch, then back to Kyoto</span></li>
-            <li><span class="t">19:00</span><span class="act"><b>YOIYAMA</b> — the main night. All 23 floats lit up, huge crowds, magic 🏮🏮</span></li>
+            <li><span class="t">7:50</span><span class="act">Train to <b>Nara</b> (45 min) — early beats the tour buses <i>and</i> the heat</span></li>
+            <li><span class="t">9:00</span><span class="act"><b>Todai-ji</b> — the 15-meter bronze Great Buddha<span class="note">One of the world's largest bronze statues, in one of the world's largest wooden buildings · squeeze through the lucky pillar hole — it's the size of the Buddha's nostril</span></span></li>
+            <li><span class="t">11:00</span><span class="act"><b>Nara Park</b> — 1,200+ wild deer that BOW for crackers 🦌<span class="note">Shika senbei ¥200 a bundle · bow first, they bow back, then flat palm · keep bags zipped — they'll eat paper maps!</span></span></li>
+            <li><span class="t">13:00</span><span class="act">Mochi-pounding show at <b>Nakatanidou</b> + lunch, then back to Kyoto</span></li>
+            <li><span class="t">19:00</span><span class="act"><b>YOIYAMA</b> — the main night. All 23 floats lit up, huge crowds, magic 🏮🏮<span class="note">Streets around the floats go car-free tonight — pure festival</span></span></li>
           </ul>
-          <div class="hl"><span class="em">🏮</span><b>Tonight is the big one.</b> Grab <i>chimaki</i> (little festival charms) from the floats — a perfect souvenir you can only get these nights.</div>
+          <div class="hl"><span class="em">🏮</span><b>Tonight is the big one.</b> Grab <i>chimaki</i> (bamboo-grass charms that ward off illness for a year) from the floats — each float's charm is different, and you can only get them these nights.</div>
+          <div class="maplinks">
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Todaiji+Temple+Nara" rel="noopener">📍 Todai-ji</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Nara+Park" rel="noopener">📍 Nara Park</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Nakatanidou+Nara" rel="noopener">📍 Nakatanidou mochi</a>
+          </div>
         </div>
       </div></div>
 
@@ -604,16 +866,20 @@
         <div class="day-head kyoto">
           <div class="day-num"><div class="d">9</div><div class="k">金</div></div>
           <div class="meta"><div class="date">Fri · July 17</div><h3>The parade + farewell dinner</h3></div>
-          <div class="stamp">🎏</div><div class="cityb">Kyoto</div>
+          <div class="stamp">祭</div><div class="cityb">Kyoto</div>
         </div>
         <div class="day-body">
           <ul class="sched">
             <li><span class="t">8:15</span><span class="act">Walk to the corner (5 min from the hotel), claim a front spot</span></li>
-            <li><span class="t">9:00</span><span class="act"><b>Yamahoko Junko parade</b> — 12-ton floats pulled by hand, spun on the corner 🎏<span class="note">Bring folding stools, water &amp; a fan — it's hot</span></span></li>
+            <li><span class="t">9:00</span><span class="act"><b>Yamahoko Junko parade</b> — 23 floats, 9:00–13:00, along Shijo → Kawaramachi → Oike 🎏<span class="note">Bring folding stools, water &amp; fans — and watch the <i>tsuji-mawashi</i>: crews drag 12-ton floats around corners on wet bamboo slats</span></span></li>
             <li><span class="t">12:00</span><span class="act">Lunch, then rest &amp; AC at the hotel</span></li>
             <li><span class="t">17:00</span><span class="act"><b>Nishiki Market</b> — last snacks &amp; souvenirs</span></li>
-            <li><span class="t">19:30</span><span class="act"><b>Farewell dinner — Pontocho Moriaka</b>, riverside 🍽️</span></li>
+            <li><span class="t">19:30</span><span class="act"><b>Farewell dinner — Pontocho Moriaka</b>, riverside 🍽️<span class="note">Kaiseki — Kyoto's multi-course art form — over the Kamo River</span></span></li>
           </ul>
+          <div class="facts">
+            <div class="fact">Floats carry <b>live Gion-bayashi bands</b> — flutes, drums &amp; bells</div>
+            <div class="fact">Our corner spot sees the floats <b>turn</b> — the hardest trick of the parade</div>
+          </div>
         </div>
       </div></div>
 
@@ -622,16 +888,20 @@
         <div class="day-head kyoto">
           <div class="day-num"><div class="d">10</div><div class="k">土</div></div>
           <div class="meta"><div class="date">Sat · July 18</div><h3>Slow Kyoto day</h3></div>
-          <div class="stamp">🍵</div><div class="cityb">Kyoto</div>
+          <div class="stamp">茶</div><div class="cityb">Kyoto</div>
         </div>
         <div class="day-body">
           <ul class="sched">
-            <li><span class="t">10:00</span><span class="act"><b>Kiyomizu-dera</b> temple + the old lanes of Higashiyama</span></li>
-            <li><span class="t">11:30</span><span class="act"><b>Sannenzaka</b> streets — matcha cafés &amp; souvenir shops 🍵</span></li>
-            <li><span class="t">14:30</span><span class="act">Tea ceremony experience</span></li>
+            <li><span class="t">10:00</span><span class="act"><b>Kiyomizu-dera</b> — the temple on a wooden stage over the hillside<span class="note">Built without a single nail, like the festival floats — Kyoto tradition</span></span></li>
+            <li><span class="t">11:30</span><span class="act"><b>Sannenzaka &amp; Ninenzaka</b> — preserved stone lanes, matcha cafés &amp; souvenir shops 🍵</span></li>
+            <li><span class="t">14:30</span><span class="act">Tea ceremony experience<span class="note">Whisked matcha + wagashi sweets — the girls learn the moves</span></span></li>
             <li><span class="t">17:00</span><span class="act">Back to pack — no rush</span></li>
             <li><span class="t">19:30</span><span class="act">Last dinner in Japan 🥢</span></li>
           </ul>
+          <div class="maplinks">
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Kiyomizu-dera" rel="noopener">📍 Kiyomizu-dera</a>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Sannenzaka+Kyoto" rel="noopener">📍 Sannenzaka</a>
+          </div>
         </div>
       </div></div>
 
@@ -640,15 +910,15 @@
         <div class="day-head travel">
           <div class="day-num"><div class="d">11</div><div class="k">日</div></div>
           <div class="meta"><div class="date">Sun · July 19</div><h3>Kyoto → Tokyo → home</h3></div>
-          <div class="stamp">🏡</div><div class="cityb">Going home</div>
+          <div class="stamp">帰路</div><div class="cityb">Going home</div>
         </div>
         <div class="day-body">
           <ul class="sched">
-            <li><span class="t">11:01</span><span class="act"><b>Nozomi 12</b> Kyoto → Tokyo 🚄</span></li>
+            <li><span class="t">11:01</span><span class="act"><b>Nozomi 12</b> Kyoto → Tokyo 🚄 — one last ekiben</span></li>
             <li><span class="t">13:15</span><span class="act">Arrive Tokyo, transfer out to Haneda</span></li>
-            <li><span class="t">14:00</span><span class="act">At the airport — lunch, last souvenirs, lounge</span></li>
+            <li><span class="t">14:00</span><span class="act">At the airport — lunch, last souvenirs, spend the leftover coins</span></li>
             <li><span class="t">21:15</span><span class="act"><b>ANA NH118</b> → Seattle ✈️</span></li>
-            <li><span class="t">14:25</span><span class="act">Land in Seattle the <i>same day</i> — time travel! 🌏</span></li>
+            <li><span class="t">14:25</span><span class="act">Land in Seattle the <i>same day</i>, seven hours before we left Tokyo — time travel! 🌏</span></li>
           </ul>
         </div>
       </div></div>
@@ -658,56 +928,160 @@
 </section>
 
 <!-- ===================== FESTIVAL SPOTLIGHT ===================== -->
-<section class="block">
+<section class="block" id="festival">
   <div class="wrap">
     <div class="spot">
       <div class="top">
         <div class="lab">Kyoto · July 14 – 17</div>
         <h3>Gion Matsuri 🏮</h3>
-        <p class="intro">Kyoto's biggest festival runs all July, and we're there for the four peak days. Three "eve" nights of lantern-lit floats and street food, then the giant morning parade. Nothing else on the trip is like it.</p>
+        <p class="intro">Kyoto's biggest festival has run for over 1,150 years — it began in 869 as a plea to end a plague — and it fills all of July. We're there for the four peak days: three "eve" nights of lantern-lit floats and street food, then the giant morning parade. Nothing else on the trip is like it.</p>
       </div>
       <div class="fest-nights">
         <div class="fnight"><div class="n">🏮</div><div class="dt">Tue 14</div><div class="nm">Yoi-yoi-yoiyama</div><div class="ds">Warm-up night, first floats &amp; stalls</div></div>
-        <div class="fnight"><div class="n">🏮</div><div class="dt">Wed 15</div><div class="nm">Yoi-yoiyama</div><div class="ds">Busier — the streets fill up</div></div>
+        <div class="fnight"><div class="n">🏮</div><div class="dt">Wed 15</div><div class="nm">Yoi-yoiyama</div><div class="ds">Busier — streets start closing to cars</div></div>
         <div class="fnight"><div class="n">🎆</div><div class="dt">Thu 16</div><div class="nm">Yoiyama</div><div class="ds">THE big night — all 23 floats lit</div></div>
-        <div class="fnight"><div class="n">🎏</div><div class="dt">Fri 17</div><div class="nm">The Parade</div><div class="ds">Morning — 12-ton floats hand-pulled</div></div>
+        <div class="fnight"><div class="n">🎏</div><div class="dt">Fri 17</div><div class="nm">The Parade</div><div class="ds">9:00–13:00 — 12-ton floats hand-pulled 3 km</div></div>
+      </div>
+      <div class="fest-facts">
+        <div class="ffact"><b>Built without nails.</b> The 23 yamaboko floats are assembled in the streets each July from wood and rope alone — some stand 25 m tall. Watching crews lash them together is a spectacle of its own.</div>
+        <div class="ffact"><b>Chimaki charms.</b> Each float sells bamboo-grass amulets that protect your home for a year. Kyoto locals hang them over the door — ours flies back to Seattle.</div>
+        <div class="ffact"><b>Gion-bayashi.</b> The "kon-chiki-chin" of flutes, taiko and bells rings from the floats all three nights — it's the sound Kyoto waits all year for.</div>
+        <div class="ffact"><b>Our hotel is inside the festival zone.</b> Kawaramachi is steps from the float streets and the parade route — when the girls get tired, bed is a 5-minute walk.</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===================== FOOD ===================== -->
-<section class="block alt">
+<section class="block alt" id="food">
   <div class="wrap">
     <div class="eyebrow">Stuff we're gonna eat <span class="jp">食</span></div>
-    <h2 class="sec">The food list</h2>
-    <p class="sec-sub">A running list of things to hunt down. Cross them off as you go.</p>
-    <div class="food">
-      <div class="bite"><div class="e">🍜</div><div class="nm">Ramen</div><div class="ds">Night one, day one</div></div>
-      <div class="bite"><div class="e">🍣</div><div class="nm">Toyosu sushi</div><div class="ds">Straight from the market</div></div>
-      <div class="bite"><div class="e">🐙</div><div class="nm">Takoyaki</div><div class="ds">Festival street stalls</div></div>
-      <div class="bite"><div class="e">🍵</div><div class="nm">Matcha everything</div><div class="ds">Kyoto specialty</div></div>
-      <div class="bite"><div class="e">🥩</div><div class="nm">Wagyu beef</div><div class="ds">Melts in your mouth</div></div>
-      <div class="bite"><div class="e">🍡</div><div class="nm">Nara mochi</div><div class="ds">Pounded fresh on the street</div></div>
-      <div class="bite"><div class="e">🍧</div><div class="nm">Kakigori</div><div class="ds">Shaved ice — festival fuel</div></div>
-      <div class="bite"><div class="e">🍢</div><div class="nm">Festival food</div><div class="ds">Yakitori, candied apples, more</div></div>
+    <h2 class="sec">The food hunt</h2>
+    <p class="sec-sub">Tap to cross things off as we eat them — the page remembers. First to spot each one in the wild gets bragging rights.</p>
+    <div class="food" id="foodHunt">
+      <button class="bite" type="button" data-k="ramen"><span class="e">🍜</span><span class="nm">Ramen</span><span class="ds">Night one, day one</span></button>
+      <button class="bite" type="button" data-k="sushi"><span class="e">🍣</span><span class="nm">Toyosu sushi</span><span class="ds">Straight from the market</span></button>
+      <button class="bite" type="button" data-k="tako"><span class="e">🐙</span><span class="nm">Takoyaki</span><span class="ds">Festival street stalls</span></button>
+      <button class="bite" type="button" data-k="matcha"><span class="e">🍵</span><span class="nm">Matcha everything</span><span class="ds">Kyoto specialty</span></button>
+      <button class="bite" type="button" data-k="wagyu"><span class="e">🥩</span><span class="nm">Wagyu beef</span><span class="ds">Melts in your mouth</span></button>
+      <button class="bite" type="button" data-k="mochi"><span class="e">🍡</span><span class="nm">Nara mochi</span><span class="ds">Pounded fresh at Nakatanidou</span></button>
+      <button class="bite" type="button" data-k="kakigori"><span class="e">🍧</span><span class="nm">Kakigori</span><span class="ds">Shaved ice — festival fuel</span></button>
+      <button class="bite" type="button" data-k="yatai"><span class="e">🍢</span><span class="nm">Festival food</span><span class="ds">Yakitori, candied fruit, more</span></button>
+      <button class="bite" type="button" data-k="konbini"><span class="e">🍙</span><span class="nm">Konbini haul</span><span class="ds">Egg sando + onigiri + melon soda</span></button>
+      <button class="bite" type="button" data-k="ekiben"><span class="e">🍱</span><span class="nm">Ekiben</span><span class="ds">Bento on the bullet train</span></button>
+      <button class="bite" type="button" data-k="taiyaki"><span class="e">🐟</span><span class="nm">Taiyaki</span><span class="ds">Fish-shaped, custard-filled</span></button>
+      <button class="bite" type="button" data-k="curry"><span class="e">🍛</span><span class="nm">Japanese curry</span><span class="ds">Rainy-day comfort food</span></button>
+    </div>
+    <div class="hunt-score" id="huntScore">0 / 12 devoured</div>
+  </div>
+</section>
+
+<!-- ===================== PHRASES ===================== -->
+<section class="block" id="phrases">
+  <div class="wrap">
+    <div class="eyebrow">Say it like a local <span class="jp">言葉</span></div>
+    <h2 class="sec">Ten phrases that unlock Japan</h2>
+    <p class="sec-sub">You'll use <i>sumimasen</i> fifty times a day. Everything else is bonus points — locals light up when you try.</p>
+    <div class="phrases">
+      <div class="phrase"><div class="jpn">すみません</div><div class="rom">sumimasen</div><div class="en">Excuse me / sorry / "over here, please!" — the magic word</div></div>
+      <div class="phrase"><div class="jpn">ありがとうございます</div><div class="rom">arigatō gozaimasu</div><div class="en">Thank you (the polite full version)</div></div>
+      <div class="phrase"><div class="jpn">これをください</div><div class="rom">kore o kudasai</div><div class="en">This one, please — point + say it, works everywhere</div></div>
+      <div class="phrase"><div class="jpn">おいしい！</div><div class="rom">oishii!</div><div class="en">Delicious! — say it to the chef, make their day</div></div>
+      <div class="phrase"><div class="jpn">いくらですか？</div><div class="rom">ikura desu ka?</div><div class="en">How much is it?</div></div>
+      <div class="phrase"><div class="jpn">トイレはどこですか？</div><div class="rom">toire wa doko desu ka?</div><div class="en">Where's the toilet?</div></div>
+      <div class="phrase"><div class="jpn">いただきます</div><div class="rom">itadakimasu</div><div class="en">Said before eating — "I gratefully receive"</div></div>
+      <div class="phrase"><div class="jpn">ごちそうさまでした</div><div class="rom">gochisōsama deshita</div><div class="en">Said after eating — thanks for the meal</div></div>
+      <div class="phrase"><div class="jpn">かわいい！</div><div class="rom">kawaii!</div><div class="en">Cute! — you will hear and say this constantly</div></div>
+      <div class="phrase"><div class="jpn">だいじょうぶです</div><div class="rom">daijōbu desu</div><div class="en">I'm fine / no thanks / all good</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MONEY ===================== -->
+<section class="block alt" id="money">
+  <div class="wrap">
+    <div class="eyebrow">Yen at a glance <span class="jp">円</span></div>
+    <h2 class="sec">Money cheat-sheet</h2>
+    <p class="sec-sub">Quick mental math: knock off two zeros and take ~60% — ¥1,000 is about six dollars.</p>
+    <div class="money">
+      <div class="yen-card">
+        <h4>What things cost</h4>
+        <div class="rate">At ~¥160 to the dollar (summer 2026 — check the app for the live rate)</div>
+        <div class="yen-grid">
+          <div class="yen"><span>Gachapon capsule</span><b>¥300 ≈ $2</b></div>
+          <div class="yen"><span>Deer crackers 🦌</span><b>¥200 ≈ $1.25</b></div>
+          <div class="yen"><span>Konbini onigiri</span><b>¥150 ≈ $1</b></div>
+          <div class="yen"><span>Vending drink</span><b>¥160 ≈ $1</b></div>
+          <div class="yen"><span>Festival takoyaki</span><b>¥600 ≈ $3.75</b></div>
+          <div class="yen"><span>Bowl of ramen</span><b>¥1,100 ≈ $7</b></div>
+          <div class="yen"><span>Cup Noodle you design</span><b>¥500 ≈ $3</b></div>
+          <div class="yen"><span>Metro ride</span><b>¥180 ≈ $1.10</b></div>
+        </div>
+      </div>
+      <div class="money-notes">
+        <div class="tip"><b>Cash is still king</b> at street stalls, small restaurants, temples and the festival. Plan on <b>$900–1,000</b> total in yen, pulled in chunks from <b>7-Eleven ATMs</b> — they're 24/7 and take our cards.</div>
+        <div class="tip"><b>Tax-free shopping:</b> spend <b>¥5,000+</b> in one store, show a passport, skip the 10% tax. Big electronics &amp; department stores all do it.</div>
+        <div class="tip"><b>No tipping — anywhere.</b> Not restaurants, not taxis. It can even cause confusion. Great service is just the default.</div>
+        <div class="tip"><b>Coin purse:</b> Japan runs on coins up to ¥500 (~$3!). Keep a pouch — the girls' gachapon fund lives there.</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ===================== KNOW BEFORE ===================== -->
-<section class="block">
+<section class="block" id="survival">
   <div class="wrap">
     <div class="eyebrow">Good to know <span class="jp">心得</span></div>
     <h2 class="sec">Trip survival kit</h2>
+    <div class="weather-strip">
+      <div class="wx"><div class="city">Tokyo · mid-July</div><div class="temp">27–34°C · humid</div><div class="det">Sunrise ~4:35 · sunset ~19:00 · brief downpours possible — rainy season is just ending</div></div>
+      <div class="wx"><div class="city">Kyoto · mid-July</div><div class="temp">28–35°C · ~80% humidity</div><div class="det">Sunrise ~4:50 · sunset ~19:10 · the famous Kyoto summer steam-bath — plan around midday</div></div>
+    </div>
     <div class="kb-grid">
-      <div class="kb"><div class="e">💴</div><h4>Cash is king</h4><p>Japan still runs on cash for street food, small restaurants, temples &amp; the festival. We'll carry around <b>$900–1,000</b> total, pulled in chunks from <b>7-Eleven ATMs</b>.</p></div>
-      <div class="kb"><div class="e">🥵</div><h4>It'll be HOT</h4><p>Mid-July is 33–35°C and humid. The plan: <b>early starts</b>, AC breaks midday, cooling towels, fans, and lots of water. Wear light colors.</p></div>
-      <div class="kb"><div class="e">🎒</div><h4>What to pack</h4><ul><li>Light, breathable clothes</li><li>Comfy shoes — 15–20k steps a day</li><li>Folding fan + cooling towel</li><li>Small day backpack</li><li>Portable charger</li></ul></div>
-      <div class="kb"><div class="e">📱</div><h4>Handy apps</h4><ul><li>Google Maps — trains &amp; walking</li><li>Suica in Apple/Google Wallet</li><li>Google Translate (camera mode!)</li><li>Screenshot this page for offline</li></ul></div>
+      <div class="kb"><div class="e">🥵</div><h4>The heat plan</h4><p>Mid-July is real summer. Our rhythm: <b>out by 8–9 AM</b>, indoor or AC stop over midday, back out after 4 PM — which is exactly when the festival comes alive. Cooling towels, folding fans, and a vending-machine drink every hour (they're on every corner for a reason).</p></div>
+      <div class="kb"><div class="e">📱</div><h4>Phone setup (before we fly)</h4><ul>
+        <li><b>Visit Japan Web</b> — register, save the QR (immigration + customs)</li>
+        <li><b>Suica</b> in Apple/Google Wallet — top up by card, tap everything</li>
+        <li>Google Maps — best-in-class for Japanese trains</li>
+        <li>Google Translate — download Japanese offline, camera mode reads menus</li>
+        <li>eSIMs installed &amp; tested</li>
+      </ul></div>
+      <div class="kb"><div class="e">🎒</div><h4>Packing checklist <span style="font-weight:400;color:var(--dimmer);font-size:.8rem">(tap to check off)</span></h4><ul class="packlist" id="packlist">
+        <li data-k="shoes">Comfy broken-in shoes — 15–20k steps a day</li>
+        <li data-k="light">Light, breathable clothes (+ shorts for teamLab!)</li>
+        <li data-k="fan">Folding fan + cooling towels</li>
+        <li data-k="pack">Small day backpack (zips — Nara deer!)</li>
+        <li data-k="charge">Portable chargers ×3</li>
+        <li data-k="stool">Folding stools for the parade</li>
+        <li data-k="towel">Small towel (teamLab feet + sweat)</li>
+        <li data-k="meds">Meds, sunscreen, band-aids for blisters</li>
+      </ul></div>
+      <div class="kb"><div class="e">🆘</div><h4>If anything goes sideways</h4><ul>
+        <li><b>110</b> — police · <b>119</b> — ambulance &amp; fire</li>
+        <li><b>Japan Visitor Hotline</b> (24/7, English): 050-3816-2787</li>
+        <li>Police boxes (<b>kōban</b>) on street corners — they help lost tourists all day</li>
+        <li>Meeting point if separated: the day's first map pin · dead phone = ask any konbini clerk</li>
+        <li>Japan is one of the safest countries on Earth — the girls can breathe</li>
+      </ul></div>
+      <div class="kb"><div class="e">🙇</div><h4>Tiny etiquette that earns big smiles</h4><ul>
+        <li>Stand <b>left</b> on Tokyo escalators (Kyoto too), walk right</li>
+        <li>No eating while walking — snack standing by the stall</li>
+        <li>Trains are library-quiet; phones on silent</li>
+        <li>Trash cans are rare — carry a small bag for wrappers</li>
+        <li>Shoes off where you see a raised floor or tatami</li>
+      </ul></div>
+      <div class="kb"><div class="e">🛍️</div><h4>Souvenir radar</h4><ul>
+        <li><b>Chimaki</b> festival charm — only exists these four nights</li>
+        <li>Goshuin book — collect hand-brushed temple stamps as we go</li>
+        <li>Gachapon capsules — tiny, cheap, hilarious</li>
+        <li>Kit-Kat flavors that don't exist at home (matcha, melon…)</li>
+        <li>Studio Ghibli anything (Donguri shops in Tokyo &amp; Kyoto)</li>
+      </ul></div>
     </div>
   </div>
 </section>
+
+<div class="waves" aria-hidden="true"></div>
 
 <!-- ===================== FOOTER ===================== -->
 <footer>
@@ -720,16 +1094,19 @@
 </footer>
 
 <script>
-  // stars
+  // ----- stars + drifting fireflies -----
   (function(){
-    var s=document.getElementById('stars'),n=70,h='';
-    for(var i=0;i<n;i++){
+    var s=document.getElementById('stars'),h='';
+    for(var i=0;i<70;i++){
       h+='<i style="left:'+Math.random()*100+'%;top:'+Math.random()*70+'%;animation-delay:'+(Math.random()*4).toFixed(2)+'s"></i>';
+    }
+    for(var j=0;j<8;j++){
+      h+='<i class="fly" style="left:'+(8+Math.random()*84)+'%;top:'+(45+Math.random()*40)+'%;animation-delay:'+(Math.random()*9).toFixed(2)+'s"></i>';
     }
     s.innerHTML=h;
   })();
 
-  // countdown to departure (Thu Jul 9 2026, 4:30pm Seattle / PDT = -07:00)
+  // ----- countdown to departure (Thu Jul 9 2026, 4:30pm Seattle / PDT = -07:00) -----
   var target=new Date('2026-07-09T16:30:00-07:00').getTime();
   function pad(x){return (x<10?'0':'')+x;}
   function tick(){
@@ -751,11 +1128,65 @@
   }
   tick();setInterval(tick,1000);
 
-  // scroll reveal for day cards
+  // ----- scroll reveal for day cards -----
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   },{threshold:.15});
   document.querySelectorAll('.day-card').forEach(function(el){io.observe(el);});
+
+  // ----- sticky nav appears after the hero -----
+  var nav=document.getElementById('topnav'), hero=document.querySelector('.hero');
+  var navIO=new IntersectionObserver(function(entries){
+    nav.classList.toggle('show', !entries[0].isIntersecting);
+  },{threshold:.06});
+  navIO.observe(hero);
+
+  // ----- checklists with memory (localStorage) -----
+  function store(key){
+    var saved={};
+    try{ saved=JSON.parse(localStorage.getItem(key)||'{}'); }catch(e){}
+    return {
+      get:function(k){return !!saved[k];},
+      set:function(k,v){ saved[k]=v; if(!v)delete saved[k];
+        try{ localStorage.setItem(key,JSON.stringify(saved)); }catch(e){} }
+    };
+  }
+  // food hunt
+  (function(){
+    var st=store('jp26-food'), bites=document.querySelectorAll('#foodHunt .bite'), score=document.getElementById('huntScore');
+    function refresh(){
+      var n=0;
+      bites.forEach(function(b){ if(b.getAttribute('aria-pressed')==='true')n++; });
+      score.textContent=n+' / '+bites.length+(n===bites.length?' — FULL SWEEP! 🏆':' devoured');
+    }
+    bites.forEach(function(b){
+      b.setAttribute('aria-pressed', st.get(b.dataset.k)?'true':'false');
+      b.addEventListener('click',function(){
+        var on=b.getAttribute('aria-pressed')!=='true';
+        b.setAttribute('aria-pressed',on?'true':'false');
+        st.set(b.dataset.k,on); refresh();
+      });
+    });
+    refresh();
+  })();
+  // packing list
+  (function(){
+    var st=store('jp26-pack');
+    document.querySelectorAll('#packlist li').forEach(function(li){
+      if(st.get(li.dataset.k)) li.dataset.done='1';
+      li.setAttribute('role','checkbox');
+      li.setAttribute('tabindex','0');
+      li.setAttribute('aria-checked', li.dataset.done==='1'?'true':'false');
+      function flip(){
+        var on=li.dataset.done!=='1';
+        if(on){li.dataset.done='1';}else{delete li.dataset.done;}
+        li.setAttribute('aria-checked',on?'true':'false');
+        st.set(li.dataset.k,on);
+      }
+      li.addEventListener('click',flip);
+      li.addEventListener('keydown',function(ev){ if(ev.key===' '||ev.key==='Enter'){ev.preventDefault();flip();} });
+    });
+  })();
 </script>
 </body>
 </html>
