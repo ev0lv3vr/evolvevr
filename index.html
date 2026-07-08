@@ -337,6 +337,37 @@
   .wx .temp{font-family:var(--serif);font-weight:800;font-size:1.7rem;color:#fff;margin-top:2px}
   .wx .det{color:var(--dim);font-size:.8rem;margin-top:4px}
 
+  /* ===== SHOPPING ===== */
+  .tips.three{grid-template-columns:repeat(3,1fr)}
+  .shop-know{margin-top:0;margin-bottom:26px}
+  .shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .shopper{background:var(--night2);border:1px solid var(--line);border-radius:18px;padding:20px 20px 14px}
+  .s-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .s-av{width:52px;height:52px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:1.6rem;
+    background:radial-gradient(circle at 50% 35%,var(--lantern-hot),var(--lantern) 70%);box-shadow:0 0 18px var(--lantern-glow)}
+  .s-head h4{font-family:var(--serif);font-size:1.2rem;font-weight:700}
+  .s-focus{color:var(--dim);font-size:.82rem;line-height:1.4}
+  .s-note{font-size:.78rem;color:var(--dimmer);background:rgba(77,120,201,.08);border:1px dashed rgba(126,163,224,.25);border-radius:10px;padding:7px 10px;margin:8px 0 2px}
+  .s-item{padding:12px 0;border-bottom:1px dashed rgba(126,163,224,.18)}
+  .s-item:last-child{border-bottom:0;padding-bottom:4px}
+  .s-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .s-name{font-weight:700;color:#fff;font-size:.95rem}
+  .s-name small{color:var(--dim);font-weight:500;font-size:.82em}
+  .s-price{font-family:var(--serif);font-weight:700;color:var(--lantern-hot);font-size:.9rem;white-space:nowrap;flex:none}
+  .s-why{color:var(--dim);font-size:.84rem;margin-top:3px}
+  .s-item .fact{display:inline-block;margin-top:8px}
+  .shop-sub{font-family:var(--serif);font-weight:800;font-size:1.3rem;margin:34px 0 14px}
+  .shop-scroll{overflow-x:auto;background:var(--night2);border:1px solid var(--line);border-radius:16px}
+  .shop-table{width:100%;min-width:560px;border-collapse:collapse;font-size:.88rem}
+  .shop-table th{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer);font-weight:700;text-align:left;padding:14px 18px 8px}
+  .shop-table td{padding:10px 18px;border-top:1px dashed rgba(126,163,224,.16);vertical-align:top}
+  .shop-table td:first-child{font-weight:700;color:var(--lantern-hot);white-space:nowrap}
+  .shop-table td:nth-child(2){color:var(--dim)}
+  .shop-table td:last-child{color:var(--ai-soft);white-space:nowrap}
+  @media(max-width:820px){
+    .shop-grid,.tips.three{grid-template-columns:1fr}
+  }
+
   /* footer */
   footer{padding:60px 0 80px;text-align:center;background:linear-gradient(180deg,#0d1430,#080b1a)}
   footer .kanji{font-family:var(--serif);font-size:2.4rem;color:var(--verm);font-weight:800;letter-spacing:.2em}
@@ -376,6 +407,7 @@
   <a href="#plan">Day by day</a>
   <a href="#tickets">Tickets</a>
   <a href="#festival">Festival</a>
+  <a href="#shopping">Shopping</a>
   <a href="#food">Food hunt</a>
   <a href="#money">Money</a>
   <a href="#phrases">Phrases</a>
@@ -932,7 +964,7 @@
 </section>
 
 <!-- ===================== FESTIVAL SPOTLIGHT ===================== -->
-<section class="block" id="festival">
+<section class="block alt" id="festival">
   <div class="wrap">
     <div class="spot">
       <div class="top">
@@ -952,6 +984,147 @@
         <div class="ffact"><b>Gion-bayashi.</b> The "kon-chiki-chin" of flutes, taiko and bells rings from the floats all three nights — it's the sound Kyoto waits all year for.</div>
         <div class="ffact"><b>Our hotel is inside the festival zone.</b> Kawaramachi is steps from the float streets and the parade route — when the girls get tired, bed is a 5-minute walk.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SHOPPING ===================== -->
+<section class="block" id="shopping">
+  <div class="wrap">
+    <div class="eyebrow">What we're bringing home <span class="jp">買い物</span></div>
+    <h2 class="sec">The shopping haul</h2>
+    <p class="sec-sub">Japan is a shopping trip disguised as a vacation. Here's what each of us is hunting for — and where to find it. Our checked bags have room; we ship the big suitcases between cities anyway.</p>
+
+    <div class="tips three shop-know">
+      <div class="tip"><b>Tax-free</b> — spend ¥5,000+ in one store and show your passport for ~10% off on the spot. Carry passports whenever you shop.</div>
+      <div class="tip"><b>Cash + card</b> — big stores take cards; markets and small shops want cash. Pull yen from 7-Eleven ATMs.</div>
+      <div class="tip"><b>Sizing runs small</b> — Japanese sizes are smaller than US. Papa's US "L" is often a JP "XL/XXL." Try everything on.</div>
+    </div>
+
+    <div class="shop-grid">
+      <div class="shopper">
+        <div class="s-head"><div class="s-av">🧳</div><div><h4>Papa</h4><div class="s-focus">Quality over logos — made-in-Japan, built to last</div></div></div>
+        <div class="s-note">Athletic build: straight or relaxed cuts, always size up, try before buying.</div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Selvedge denim <small>(Momotaro or Iron Heart)</small></span><span class="s-price">~$130–230</span></div>
+          <div class="s-why">Japan makes the best raw denim on earth; it ages to a pattern that's uniquely yours. Straight or relaxed cut — they'll chain-stitch the hem on site in ~20 min.</div>
+          <span class="fact">Aoyama · Nakameguro</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Loopwheeler zip-up hoodie</span><span class="s-price">~$185–230</span></div>
+          <div class="s-why">Sweatshirts knit on vintage loop-wheel machines; no logos, just the best sweatshirt you'll own. Zip-up available.</div>
+          <span class="fact">Minami-Aoyama</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Porter Tanker bag</span><span class="s-price">~$120–165</span></div>
+          <div class="s-why">Japan's iconic nylon shoulder bag since 1983 — hands-free through festival crowds. Sage green is the classic. Buying it day 1 near the hotel: PORTER SHINJUKU (Isetan, 2F) or PORTER STAND (LUMINE EST); flagship also in Aoyama.</div>
+          <span class="fact">Shinjuku · day 1</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Bonus: vintage track &amp; athletic gear</span><span class="s-price">~$50–200</span></div>
+          <div class="s-why">Tokyo's second-hand game is the best in the world; real 70s–80s track jackets in mint condition.</div>
+          <span class="fact">Shimokitazawa · Koenji</span>
+        </div>
+      </div>
+
+      <div class="shopper">
+        <div class="s-head"><div class="s-av">📸</div><div><h4>Anastasiya</h4><div class="s-focus">Fashion, thrift finds &amp; good skincare</div></div></div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Shimokitazawa vintage</span><span class="s-price">$ varies</span></div>
+          <div class="s-why">Tokyo's thrift mecca: dozens of shops, curated second-hand fashion, one-of-a-kind pieces.</div>
+          <span class="fact">Shimokitazawa</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Harajuku fashion</span><span class="s-price">$ varies</span></div>
+          <div class="s-why">Takeshita Street + Cat Street: WEGO, Spinns, GU flagship, streetwear and accessories.</div>
+          <span class="fact">Harajuku</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Japanese + Korean skincare &amp; makeup</span><span class="s-price">$</span></div>
+          <div class="s-why">@cosme Tokyo (Harajuku) and Matsumoto Kiyoshi drugstores: sheet masks, sunscreen, cult products cheaper than home.</div>
+          <span class="fact">Harajuku · everywhere</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Stationery &amp; design</span><span class="s-price">$</span></div>
+          <div class="s-why">Loft and Itoya: beautiful pens, notebooks, stickers, gifts.</div>
+          <span class="fact">Shibuya · Ginza</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Accessories &amp; jewelry</span><span class="s-price">$</span></div>
+          <div class="s-why">PARCO and Shibuya109 for trend pieces and small brands.</div>
+          <span class="fact">Shibuya</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Film / disposable cameras</span><span class="s-price">$</span></div>
+          <div class="s-why">Bic Camera / Yodobashi: cheap film and point-and-shoots for the trip aesthetic.</div>
+          <span class="fact">Shinjuku · Akihabara</span>
+        </div>
+      </div>
+
+      <div class="shopper">
+        <div class="s-head"><div class="s-av">🍡</div><div><h4>Vlada</h4><div class="s-focus">Cute stuff, characters &amp; snacks</div></div></div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Sanrio &amp; character goods</span><span class="s-price">$</span></div>
+          <div class="s-why">Kiddy Land Harajuku — 5 floors of Sanrio, Studio Ghibli, Pokémon and more.</div>
+          <span class="fact">Harajuku</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Pokémon Center &amp; Nintendo Tokyo</span><span class="s-price">$</span></div>
+          <div class="s-why">Pokémon Center DX and Nintendo Tokyo (Shibuya PARCO): exclusive merch and plushies.</div>
+          <span class="fact">Shibuya · Ikebukuro</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Gachapon</span><span class="s-price">¢</span></div>
+          <div class="s-why">Capsule-toy halls in Akihabara: hundreds of machines, ¥300–500 a go.</div>
+          <span class="fact">Akihabara</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Don Quijote haul</span><span class="s-price">$</span></div>
+          <div class="s-why">The giant everything-store: kawaii accessories, face masks, weird snacks, souvenirs.</div>
+          <span class="fact">Shibuya · everywhere</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Konbini + Don Quijote snacks</span><span class="s-price">¢</span></div>
+          <div class="s-why">Limited-edition Kit Kats, Pocky, candy, drinks — grab a stash to bring home.</div>
+          <span class="fact">Everywhere</span>
+        </div>
+        <div class="s-item">
+          <div class="s-top"><span class="s-name">Stationery &amp; plushies</span><span class="s-price">$</span></div>
+          <div class="s-why">Loft / Tokyu Hands: cute pens, stickers, plush toys, gifts for friends.</div>
+          <span class="fact">Shibuya</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="shop-sub">👯 Do-together missions</h3>
+    <div class="tips">
+      <div class="tip"><b>Purikura</b> — over-the-top photo booths in Harajuku &amp; Shibuya game centers. A must.</div>
+      <div class="tip"><b>Claw machines / game centers</b> — try to win a plushie.</div>
+      <div class="tip"><b>Kyoto matcha sweets</b> — Nishiki Market &amp; Gion: matcha Kit Kats, mochi, snacks as gifts.</div>
+      <div class="tip"><b>Traditional souvenirs (Kyoto)</b> — fans, furoshiki cloths, chopsticks, small crafts along Sannenzaka.</div>
+    </div>
+
+    <h3 class="shop-sub">🗺️ Where to shop, by area</h3>
+    <div class="shop-scroll">
+      <table class="shop-table">
+        <thead><tr><th>Area</th><th>What's there</th><th>Lines up with</th></tr></thead>
+        <tbody>
+          <tr><td>Akihabara</td><td>Anime, games, gachapon, cameras</td><td>Day 3 (Sat Jul 11)</td></tr>
+          <tr><td>Harajuku / Omotesando / Aoyama</td><td>Girls: fashion, Sanrio, skincare · Papa: denim, Loopwheeler, Porter, Onitsuka</td><td>Day 3 &amp; Day 4</td></tr>
+          <tr><td>Shibuya</td><td>PARCO, 109, Loft, Don Quijote, character stores</td><td>Day 3 &amp; Day 4</td></tr>
+          <tr><td>Daikanyama / Nakameguro / Ebisu</td><td>Papa: Real McCoy's, Iron Heart, Hender Scheme, Kapital</td><td>Flexible (near Day 4)</td></tr>
+          <tr><td>Ginza</td><td>Grand Seiko, Itoya, department stores</td><td>Flexible</td></tr>
+          <tr><td>Shimokitazawa</td><td>Vintage fashion &amp; vintage track gear</td><td>Day 5 morning (optional)</td></tr>
+          <tr><td>Nishiki Market / Gion (Kyoto)</td><td>Matcha sweets, snacks, traditional souvenirs</td><td>Day 9 &amp; Day 10</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="shop-sub">💡 Haul logistics</h3>
+    <div class="tips three">
+      <div class="tip"><b>Ship, don't carry</b> — we forward the big suitcases Tokyo → Kyoto, and our ANA bags allow 2×23 kg each — plenty of room for hauls. Consider packing one near-empty bag on the way out.</div>
+      <div class="tip"><b>Best shopping window</b> — Day 4 (Jul 12): while the girls are at the salon in Aoyama, Papa hits the denim / Loopwheeler / Porter loop nearby. Everyone shops, nobody waits.</div>
+      <div class="tip"><b>Save Kyoto for last</b> — do edible &amp; traditional souvenirs at Nishiki Market on Day 9–10 so they're fresh for the flight home.</div>
     </div>
   </div>
 </section>
@@ -997,25 +1170,6 @@
       <div class="phrase"><div class="jpn">ごちそうさまでした</div><div class="rom">gochisōsama deshita</div><div class="en">Said after eating — thanks for the meal</div></div>
       <div class="phrase"><div class="jpn">かわいい！</div><div class="rom">kawaii!</div><div class="en">Cute! — you will hear and say this constantly</div></div>
       <div class="phrase"><div class="jpn">だいじょうぶです</div><div class="rom">daijōbu desu</div><div class="en">I'm fine / no thanks / all good</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== SHOPPING ===================== -->
-<section class="block" id="shopping">
-  <div class="wrap">
-    <div class="eyebrow">Papa's list <span class="jp">買い物</span></div>
-    <h2 class="sec">The shopping list</h2>
-    <p class="sec-sub">Things to actually hunt down in a store — starting with the day-one buy.</p>
-    <div class="tix">
-      <div class="ticket gold"><div class="side"></div><div class="inner">
-        <div class="em">🎒</div>
-        <div class="lab">Papa · buy this first</div>
-        <h4>Porter Tanker sling bag</h4>
-        <div class="when">~$90–160</div>
-        <div class="ref">Everyday hands-free bag, worn across the chest — passport, cash &amp; phone up front in crowds, no backpack needed. Grab it FIRST — Shinjuku, near the hotel: <b>PORTER SHINJUKU</b> (Isetan Main Bldg, 2F, ~10:00–20:00) or <b>PORTER STAND</b> (LUMINE EST, by the station). Iconic Porter Tanker nylon; sage green is the classic, black also works.</div>
-        <div class="facts" style="margin-top:10px"><span class="fact"><b>Shinjuku</b> · day 1</span></div>
-      </div></div>
     </div>
   </div>
 </section>
