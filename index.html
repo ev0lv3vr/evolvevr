@@ -247,6 +247,10 @@
   .day-head .stamp{flex:none;width:54px;height:54px;border:2px solid rgba(255,255,255,.55);border-radius:50%;display:grid;place-items:center;
     font-family:var(--serif);font-weight:800;font-size:1.15rem;color:rgba(255,255,255,.9);transform:rotate(8deg);letter-spacing:0}
   .day-head .cityb{position:absolute;right:16px;bottom:8px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:700}
+  .wxchip{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;font-weight:700;letter-spacing:.04em;
+    background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:2px 9px;
+    margin-left:8px;color:#fff;vertical-align:middle;text-transform:none;font-variant-numeric:tabular-nums}
+  .wxchip:empty{display:none}
 
   .day-body{padding:6px 22px 20px}
   .sched{list-style:none;margin:10px 0 0}
@@ -708,7 +712,7 @@
       <div class="day"><div class="day-card">
         <div class="day-head travel">
           <div class="day-num"><div class="d">1</div><div class="k">木</div></div>
-          <div class="meta"><div class="date">Thu · July 9</div><h3>Fly out of Seattle</h3></div>
+          <div class="meta"><div class="date">Thu · July 9 <span class="wxchip" data-city="sea" data-date="2026-07-09"></span></div><h3>Fly out of Seattle</h3></div>
           <div class="stamp">出発</div><div class="cityb">In transit</div>
         </div>
         <div class="day-body">
@@ -728,7 +732,7 @@
       <div class="day"><div class="day-card">
         <div class="day-head tokyo">
           <div class="day-num"><div class="d">2</div><div class="k">金</div></div>
-          <div class="meta"><div class="date">Fri · July 10</div><h3>Land in Tokyo</h3></div>
+          <div class="meta"><div class="date">Fri · July 10 <span class="wxchip" data-city="tokyo" data-date="2026-07-10"></span></div><h3>Land in Tokyo</h3></div>
           <div class="stamp">東京</div><div class="cityb">Tokyo</div>
         </div>
         <div class="day-body">
@@ -740,8 +744,8 @@
             <li><span class="t">23:00</span><span class="act">Sleep! Beat the jet lag.</span></li>
           </ul>
           <div class="maplinks">
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Mimaru+Tokyo+Shinjuku+West" rel="noopener">📍 Mimaru Shinjuku West</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Haneda+Airport+Terminal+3" rel="noopener">📍 Haneda T3</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Mimaru+Tokyo+Shinjuku+West" rel="noopener">📍 Mimaru Shinjuku West</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Haneda+Airport+Terminal+3" rel="noopener">📍 Haneda T3</a>
           </div>
         </div>
       </div></div>
@@ -750,23 +754,23 @@
       <div class="day"><div class="day-card">
         <div class="day-head tokyo">
           <div class="day-num"><div class="d">3</div><div class="k">土</div></div>
-          <div class="meta"><div class="date">Sat · July 11</div><h3>Old Tokyo meets neon Tokyo</h3></div>
+          <div class="meta"><div class="date">Sat · July 11 <span class="wxchip" data-city="tokyo" data-date="2026-07-11"></span></div><h3>Old Tokyo meets neon Tokyo</h3></div>
           <div class="stamp">浅草</div><div class="cityb">Tokyo</div>
         </div>
         <div class="day-body">
           <ul class="sched">
             <li><span class="t">9:00</span><span class="act"><b>Senso-ji</b> temple in Asakusa — get there early, no crowds ⛩️<span class="note">Tokyo's oldest temple (founded 628) — walk in under the giant red Kaminarimon lantern</span></span></li>
             <li><span class="t">10:30</span><span class="act"><b>Nakamise-dori</b> — 250 m of snack &amp; souvenir stalls leading to the temple<span class="note">Try age-manju (fried sweet buns) and fresh senbei crackers</span></span></li>
-            <li><span class="t">11:30</span><span class="act"><b>Tokyo Skytree</b> — up the tower for the view<span class="note">634 m — the tallest tower on Earth; decks at 350 m and 450 m</span></span></li>
+            <li><span class="t">11:30</span><span class="act"><b>Tokyo Skytree</b> — up the tower for the view<span class="note">634 m — the tallest tower on Earth; decks at 350 m and 450 m · buy timed tickets on its site over breakfast to skip the Saturday queue</span></span></li>
             <li><span class="t">13:30</span><span class="act"><b>Akihabara</b> — anime, games, gachapon, Don Quijote 🎮</span></li>
             <li><span class="t">17:30</span><span class="act"><b>Shibuya Crossing</b> + Hachiko statue<span class="note">Up to ~3,000 people cross on a single green light — watch one wave from the Starbucks window first</span></span></li>
             <li><span class="t">19:00</span><span class="act">Dinner in Shibuya</span></li>
           </ul>
           <div class="hl"><span class="em">💡</span><b>Anastasiya:</b> Harajuku &amp; Cat Street are right here for shopping. <b>Vlada:</b> Akihabara has whole floors of gachapon — hundreds of capsule machines. Bring ¥100 coins.</div>
           <div class="maplinks">
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Sensoji+Temple+Asakusa" rel="noopener">📍 Senso-ji</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Tokyo+Skytree" rel="noopener">📍 Skytree</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Shibuya+Scramble+Crossing" rel="noopener">📍 Shibuya Crossing</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Sensoji+Temple+Asakusa" rel="noopener">📍 Senso-ji</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Tokyo+Skytree" rel="noopener">📍 Skytree</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Shibuya+Scramble+Crossing" rel="noopener">📍 Shibuya Crossing</a>
           </div>
         </div>
       </div></div>
@@ -775,22 +779,22 @@
       <div class="day"><div class="day-card">
         <div class="day-head tokyo">
           <div class="day-num"><div class="d">4</div><div class="k">日</div></div>
-          <div class="meta"><div class="date">Sun · July 12</div><h3>Art, haircuts &amp; the night skyline</h3></div>
+          <div class="meta"><div class="date">Sun · July 12 <span class="wxchip" data-city="tokyo" data-date="2026-07-12"></span></div><h3>Art, haircuts &amp; the night skyline</h3></div>
           <div class="stamp">光</div><div class="cityb">Tokyo</div>
         </div>
         <div class="day-body">
           <ul class="sched">
             <li><span class="t">9:00</span><span class="act"><b>teamLab Planets</b> — walk barefoot through water &amp; light 💧<span class="note">Wear shorts (knee-deep water + mirror floors) · free lockers for shoes &amp; bags · bring a small towel for your feet · budget ~2 hours — it doubled in size in 2026 with the new Athletic Forest</span></span></li>
-            <li><span class="t">12:00</span><span class="act">Fresh sushi at <b>Toyosu Market</b> 🍣 — 10 minutes away, straight from the world's biggest fish market</span></li>
+            <li><span class="t">12:00</span><span class="act">Fresh sushi at <b>Toyosu Market</b> 🍣 — 10 minutes away, straight from the world's biggest fish market<span class="note">Sunday heads-up: the market floor (and most of its sushi counters) rests today — plan B is Tsukiji Outer Market, 10 min by taxi and lively on Sundays</span></span></li>
             <li><span class="t">14:00</span><span class="act"><b>Girls:</b> haircuts at Assort · <b>Papa:</b> shopping in Aoyama</span></li>
             <li><span class="t">16:30</span><span class="act">Meet up — Harajuku &amp; Omotesando</span></li>
             <li><span class="t">18:00</span><span class="act">Dinner</span></li>
             <li><span class="t">20:00</span><span class="act"><b>Tokyo City View</b> (Roppongi) — night skyline 🌃<span class="note">52nd floor, Tokyo Tower lit up below us — sunset is 19:00, so we arrive to full night sparkle</span></span></li>
           </ul>
           <div class="maplinks">
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=teamLab+Planets+TOKYO" rel="noopener">📍 teamLab Planets</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Toyosu+Market" rel="noopener">📍 Toyosu Market</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Tokyo+City+View+Roppongi+Hills" rel="noopener">📍 Tokyo City View</a>
+            <a class="maplink" href="https://maps.apple.com/?q=teamLab+Planets+TOKYO" rel="noopener">📍 teamLab Planets</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Toyosu+Market" rel="noopener">📍 Toyosu Market</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Tokyo+City+View+Roppongi+Hills" rel="noopener">📍 Tokyo City View</a>
           </div>
         </div>
       </div></div>
@@ -799,7 +803,7 @@
       <div class="day"><div class="day-card">
         <div class="day-head tokyo">
           <div class="day-num"><div class="d">5</div><div class="k">月</div></div>
-          <div class="meta"><div class="date">Mon · July 13</div><h3>Day trip to Yokohama</h3></div>
+          <div class="meta"><div class="date">Mon · July 13 <span class="wxchip" data-city="yokohama" data-date="2026-07-13"></span></div><h3>Day trip to Yokohama</h3></div>
           <div class="stamp">横浜</div><div class="cityb">Yokohama</div>
         </div>
         <div class="day-body">
@@ -812,8 +816,8 @@
           </ul>
           <div class="hl"><span class="em">🧳</span><b>Tonight:</b> pack the big suitcases — Yamato ships them ahead to the Kyoto hotel so tomorrow's train is day-packs only.</div>
           <div class="maplinks">
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Cup+Noodles+Museum+Yokohama" rel="noopener">📍 Cup Noodle Museum</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Yokohama+Chinatown" rel="noopener">📍 Chinatown</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Cup+Noodles+Museum+Yokohama" rel="noopener">📍 Cup Noodle Museum</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Yokohama+Chinatown" rel="noopener">📍 Chinatown</a>
           </div>
         </div>
       </div></div>
@@ -822,14 +826,14 @@
       <div class="day"><div class="day-card">
         <div class="day-head kyoto">
           <div class="day-num"><div class="d">6</div><div class="k">火</div></div>
-          <div class="meta"><div class="date">Tue · July 14</div><h3>Bullet train to Kyoto + first festival night</h3></div>
+          <div class="meta"><div class="date">Tue · July 14 <span class="wxchip" data-city="kyoto" data-date="2026-07-14"></span></div><h3>Bullet train to Kyoto + first festival night</h3></div>
           <div class="stamp">京都</div><div class="cityb">Kyoto</div>
         </div>
         <div class="day-body">
           <ul class="sched">
             <li><span class="t">9:00</span><span class="act"><b>Nozomi 243</b> Tokyo → Kyoto 🚄<span class="note">Ekiben breakfast on board · right-hand window ~40 min in for Mt. Fuji</span></span></li>
             <li><span class="t">11:15</span><span class="act">Arrive Kyoto, drop bags, lunch at <b>Nishiki Market</b><span class="note">"Kyoto's kitchen" — a 400-year-old covered food street, 5 min from the hotel</span></span></li>
-            <li><span class="t">14:00</span><span class="act"><b>Fushimi Inari</b> — the mountain of vermilion torii gates 🦊⛩️<span class="note">~10,000 gates · free, open 24/7 · climb to the Yotsutsuji viewpoint (~45 min) for the city view</span></span></li>
+            <li><span class="t">14:00</span><span class="act"><b>Fushimi Inari</b> — the mountain of vermilion torii gates 🦊⛩️<span class="note">~10,000 gates · free, open 24/7 · climb to the Yotsutsuji viewpoint (~45 min) for the city view · the climb is hot at 2 PM — stock up at the vending machines by the entrance, shade grows as you go up</span></span></li>
             <li><span class="t">17:00</span><span class="act">Check in, shower, rest</span></li>
             <li><span class="t">20:00</span><span class="act"><b>Yoi-yoi-yoiyama</b> — first festival street night, food stalls &amp; lantern floats 🏮</span></li>
           </ul>
@@ -838,9 +842,9 @@
             <div class="fact">Each torii gate was donated — names carved on the back</div>
           </div>
           <div class="maplinks">
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Fushimi+Inari+Taisha" rel="noopener">📍 Fushimi Inari</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Nishiki+Market+Kyoto" rel="noopener">📍 Nishiki Market</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Cross+Hotel+Kyoto" rel="noopener">📍 Cross Hotel</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Fushimi+Inari+Taisha" rel="noopener">📍 Fushimi Inari</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Nishiki+Market+Kyoto" rel="noopener">📍 Nishiki Market</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Cross+Hotel+Kyoto" rel="noopener">📍 Cross Hotel</a>
           </div>
         </div>
       </div></div>
@@ -849,7 +853,7 @@
       <div class="day"><div class="day-card">
         <div class="day-head kyoto">
           <div class="day-num"><div class="d">7</div><div class="k">水</div></div>
-          <div class="meta"><div class="date">Wed · July 15</div><h3>Bamboo, monkeys &amp; gold</h3></div>
+          <div class="meta"><div class="date">Wed · July 15 <span class="wxchip" data-city="kyoto" data-date="2026-07-15"></span></div><h3>Bamboo, monkeys &amp; gold</h3></div>
           <div class="stamp">嵐山</div><div class="cityb">Kyoto</div>
         </div>
         <div class="day-body">
@@ -861,10 +865,11 @@
             <li><span class="t">16:00</span><span class="act">Rest at the hotel</span></li>
             <li><span class="t">19:00</span><span class="act"><b>Yoi-yoiyama</b> — festival night #2, even busier 🏮</span></li>
           </ul>
+          <div class="hl"><span class="em">🚕</span><b>Getting around today:</b> Arashiyama and Kinkaku-ji are on the far side of town — with three of us, short taxis beat the packed festival-week buses and cost about the same. Kyoto cabs take cards.</div>
           <div class="maplinks">
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Arashiyama+Bamboo+Grove" rel="noopener">📍 Bamboo Grove</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Iwatayama+Monkey+Park" rel="noopener">📍 Monkey Park</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Kinkakuji+Golden+Pavilion" rel="noopener">📍 Kinkaku-ji</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Arashiyama+Bamboo+Grove" rel="noopener">📍 Bamboo Grove</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Iwatayama+Monkey+Park" rel="noopener">📍 Monkey Park</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Kinkakuji+Golden+Pavilion" rel="noopener">📍 Kinkaku-ji</a>
           </div>
         </div>
       </div></div>
@@ -873,7 +878,7 @@
       <div class="day"><div class="day-card">
         <div class="day-head kyoto">
           <div class="day-num"><div class="d">8</div><div class="k">木</div></div>
-          <div class="meta"><div class="date">Thu · July 16</div><h3>Deer in Nara + the BIG festival night</h3></div>
+          <div class="meta"><div class="date">Thu · July 16 <span class="wxchip" data-city="nara" data-date="2026-07-16"></span></div><h3>Deer in Nara + the BIG festival night</h3></div>
           <div class="stamp">奈良</div><div class="cityb">Nara → Kyoto</div>
         </div>
         <div class="day-body">
@@ -882,13 +887,13 @@
             <li><span class="t">9:00</span><span class="act"><b>Todai-ji</b> — the 15-meter bronze Great Buddha<span class="note">One of the world's largest bronze statues, in one of the world's largest wooden buildings · squeeze through the lucky pillar hole — it's the size of the Buddha's nostril</span></span></li>
             <li><span class="t">11:00</span><span class="act"><b>Nara Park</b> — 1,200+ wild deer that BOW for crackers 🦌<span class="note">Shika senbei ¥200 a bundle · bow first, they bow back, then flat palm · keep bags zipped — they'll eat paper maps!</span></span></li>
             <li><span class="t">13:00</span><span class="act">Mochi-pounding show at <b>Nakatanidou</b> + lunch, then back to Kyoto</span></li>
-            <li><span class="t">19:00</span><span class="act"><b>YOIYAMA</b> — the main night. All 23 floats lit up, huge crowds, magic 🏮🏮<span class="note">Streets around the floats go car-free tonight — pure festival</span></span></li>
+            <li><span class="t">19:00</span><span class="act"><b>YOIYAMA</b> — the main night. All 23 floats lit up, huge crowds, magic 🏮🏮<span class="note">Streets around the floats go car-free tonight — pure festival · meet-point if we get separated: the hotel lobby, 5 min away</span></span></li>
           </ul>
           <div class="hl"><span class="em">🏮</span><b>Tonight is the big one.</b> Grab <i>chimaki</i> (bamboo-grass charms that ward off illness for a year) from the floats — each float's charm is different, and you can only get them these nights.</div>
           <div class="maplinks">
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Todaiji+Temple+Nara" rel="noopener">📍 Todai-ji</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Nara+Park" rel="noopener">📍 Nara Park</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Nakatanidou+Nara" rel="noopener">📍 Nakatanidou mochi</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Todaiji+Temple+Nara" rel="noopener">📍 Todai-ji</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Nara+Park" rel="noopener">📍 Nara Park</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Nakatanidou+Nara" rel="noopener">📍 Nakatanidou mochi</a>
           </div>
         </div>
       </div></div>
@@ -897,17 +902,22 @@
       <div class="day"><div class="day-card">
         <div class="day-head kyoto">
           <div class="day-num"><div class="d">9</div><div class="k">金</div></div>
-          <div class="meta"><div class="date">Fri · July 17</div><h3>The parade + farewell dinner</h3></div>
+          <div class="meta"><div class="date">Fri · July 17 <span class="wxchip" data-city="kyoto" data-date="2026-07-17"></span></div><h3>The parade + farewell dinner</h3></div>
           <div class="stamp">祭</div><div class="cityb">Kyoto</div>
         </div>
         <div class="day-body">
           <ul class="sched">
             <li><span class="t">8:15</span><span class="act">Walk to the corner (5 min from the hotel), claim a front spot</span></li>
-            <li><span class="t">9:00</span><span class="act"><b>Yamahoko Junko parade</b> — 23 floats, 9:00–13:00, along Shijo → Kawaramachi → Oike 🎏<span class="note">Bring folding stools, water &amp; fans — and watch the <i>tsuji-mawashi</i>: crews drag 12-ton floats around corners on wet bamboo slats</span></span></li>
+            <li><span class="t">9:00</span><span class="act"><b>Yamahoko Junko parade</b> — 23 floats, 9:00–13:00, along Shijo → Kawaramachi → Oike 🎏<span class="note">Bring folding stools, water, fans &amp; sunscreen — our corner gets full morning sun. Watch the <i>tsuji-mawashi</i>: crews drag 12-ton floats around corners on wet bamboo slats. Check the weather chip above — if it shows ⛈️, pack the ponchos: the parade runs rain or shine</span></span></li>
             <li><span class="t">12:00</span><span class="act">Lunch, then rest &amp; AC at the hotel</span></li>
             <li><span class="t">17:00</span><span class="act"><b>Nishiki Market</b> — last snacks &amp; souvenirs</span></li>
             <li><span class="t">19:30</span><span class="act"><b>Farewell dinner — Pontocho Moriaka</b>, riverside 🍽️<span class="note">Kaiseki — Kyoto's multi-course art form — over the Kamo River</span></span></li>
           </ul>
+          <div class="maplinks">
+            <a class="maplink" href="https://maps.apple.com/?q=Shijo+Kawaramachi+crossing+Kyoto" rel="noopener">📍 Parade corner (Shijo × Kawaramachi)</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Pontocho+Kyoto" rel="noopener">📍 Pontocho</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Nishiki+Market+Kyoto" rel="noopener">📍 Nishiki Market</a>
+          </div>
           <div class="facts">
             <div class="fact">Floats carry <b>live Gion-bayashi bands</b> — flutes, drums &amp; bells</div>
             <div class="fact">Our corner spot sees the floats <b>turn</b> — the hardest trick of the parade</div>
@@ -919,7 +929,7 @@
       <div class="day"><div class="day-card">
         <div class="day-head kyoto">
           <div class="day-num"><div class="d">10</div><div class="k">土</div></div>
-          <div class="meta"><div class="date">Sat · July 18</div><h3>Slow Kyoto day</h3></div>
+          <div class="meta"><div class="date">Sat · July 18 <span class="wxchip" data-city="kyoto" data-date="2026-07-18"></span></div><h3>Slow Kyoto day</h3></div>
           <div class="stamp">茶</div><div class="cityb">Kyoto</div>
         </div>
         <div class="day-body">
@@ -931,8 +941,8 @@
             <li><span class="t">19:30</span><span class="act">Last dinner in Japan 🥢</span></li>
           </ul>
           <div class="maplinks">
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Kiyomizu-dera" rel="noopener">📍 Kiyomizu-dera</a>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Sannenzaka+Kyoto" rel="noopener">📍 Sannenzaka</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Kiyomizu-dera" rel="noopener">📍 Kiyomizu-dera</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Sannenzaka+Kyoto" rel="noopener">📍 Sannenzaka</a>
           </div>
         </div>
       </div></div>
@@ -941,14 +951,14 @@
       <div class="day"><div class="day-card">
         <div class="day-head travel">
           <div class="day-num"><div class="d">11</div><div class="k">日</div></div>
-          <div class="meta"><div class="date">Sun · July 19</div><h3>One last Tokyo afternoon, then home</h3></div>
+          <div class="meta"><div class="date">Sun · July 19 <span class="wxchip" data-city="tokyo" data-date="2026-07-19"></span></div><h3>One last Tokyo afternoon, then home</h3></div>
           <div class="stamp">帰路</div><div class="cityb">Going home</div>
         </div>
         <div class="day-body">
           <ul class="sched">
             <li><span class="t">11:01</span><span class="act"><b>Nozomi 12</b> Kyoto → Tokyo 🚄</span></li>
-            <li><span class="t">13:15</span><span class="act">Arrive <b>Tokyo Station</b> — stash the suitcases in coin lockers 🔐</span></li>
-            <li><span class="t">13:30</span><span class="act">Last afternoon, hands-free — <b>Ginza</b> for final shopping &amp; a farewell lunch 🛍️<span class="note">Or Akihabara for one more anime run — 3 min away</span></span></li>
+            <li><span class="t">13:15</span><span class="act">Arrive <b>Tokyo Station</b> — stash the suitcases in coin lockers 🔐<span class="note">Large lockers ¥700–1,000, pay by Suica tap — photograph the locker number &amp; nearest exit sign</span></span></li>
+            <li><span class="t">13:30</span><span class="act">Last afternoon, hands-free — <b>Ginza</b> for final shopping &amp; a farewell lunch 🛍️<span class="note">Or Akihabara for one more anime run — 3 min away · Sunday bonus: Ginza's main street goes car-free from noon, the whole boulevard turns pedestrian</span></span></li>
             <li><span class="t">17:00</span><span class="act">Back to Tokyo Station, grab the bags</span></li>
             <li><span class="t">17:30</span><span class="act">Big Uber / taxi straight to <b>Haneda</b> (30–45 min) 🚕</span></li>
             <li><span class="t">18:15</span><span class="act">At <b>HND Terminal 3</b> — check in, last souvenirs, lounge</span></li>
@@ -956,6 +966,11 @@
             <li><span class="t">14:25</span><span class="act">Land in Seattle the <i>same day</i> — time travel! 🌏</span></li>
           </ul>
           <div class="hl"><span class="em">🔐</span><b>Bags on the way home:</b> keep the suitcases with us on the train, lock them in coin lockers at Tokyo Station for the afternoon, then take a big Uber (Uber Van) straight to the airport — no luggage forwarding needed this time. Backup if the big lockers are full: use the manned baggage storage counter at Tokyo Station.</div>
+          <div class="maplinks">
+            <a class="maplink" href="https://maps.apple.com/?q=Tokyo+Station" rel="noopener">📍 Tokyo Station</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Ginza+Tokyo" rel="noopener">📍 Ginza</a>
+            <a class="maplink" href="https://maps.apple.com/?q=Haneda+Airport+Terminal+3" rel="noopener">📍 Haneda T3</a>
+          </div>
         </div>
       </div></div>
 
@@ -1317,6 +1332,51 @@
     nav.classList.toggle('show', !entries[0].isIntersecting);
   },{threshold:.06});
   navIO.observe(hero);
+
+  // ----- live weather chips on day cards (Open-Meteo, no key; fails silently offline) -----
+  (function(){
+    var CITIES={
+      sea:{lat:47.4502,lon:-122.3088,name:'Seattle'},
+      tokyo:{lat:35.6812,lon:139.7671,name:'Tokyo'},
+      yokohama:{lat:35.4437,lon:139.638,name:'Yokohama'},
+      kyoto:{lat:35.0116,lon:135.7681,name:'Kyoto'},
+      nara:{lat:34.6851,lon:135.8048,name:'Nara'}
+    };
+    var chips=document.querySelectorAll('.wxchip[data-city]');
+    if(!chips.length||!window.fetch)return;
+    var keys=Object.keys(CITIES);
+    function wemo(c){
+      if(c===0)return'☀️'; if(c<=2)return'🌤️'; if(c===3)return'☁️'; if(c<=48)return'🌫️';
+      if(c<=57)return'🌦️'; if(c<=67)return'🌧️'; if(c<=77)return'🌨️'; if(c<=82)return'🌧️';
+      if(c<=86)return'🌨️'; return'⛈️';
+    }
+    function render(data){
+      var byCity={};
+      keys.forEach(function(k,i){ byCity[k]=data[i]; });
+      chips.forEach(function(ch){
+        var d=byCity[ch.dataset.city]; if(!d||!d.daily)return;
+        var i=d.daily.time.indexOf(ch.dataset.date); if(i<0)return;
+        var t=wemo(d.daily.weather_code[i])+' '+Math.round(d.daily.temperature_2m_max[i])+'°/'+Math.round(d.daily.temperature_2m_min[i])+'°';
+        var p=d.daily.precipitation_probability_max[i];
+        if(p>=30)t+=' · ☔'+p+'%';
+        ch.textContent=t;
+        ch.title='Forecast for '+CITIES[ch.dataset.city].name+', '+ch.dataset.date;
+      });
+    }
+    try{
+      var cached=JSON.parse(localStorage.getItem('jp26-wx')||'null');
+      if(cached&&Date.now()-cached.t<3*3600*1000){render(cached.d);return;}
+    }catch(e){}
+    var url='https://api.open-meteo.com/v1/forecast?latitude='+keys.map(function(k){return CITIES[k].lat;}).join(',')
+      +'&longitude='+keys.map(function(k){return CITIES[k].lon;}).join(',')
+      +'&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
+      +'&timezone=auto&start_date=2026-07-09&end_date=2026-07-19';
+    fetch(url).then(function(r){return r.json();}).then(function(j){
+      var data=Array.isArray(j)?j:[j];
+      render(data);
+      try{localStorage.setItem('jp26-wx',JSON.stringify({t:Date.now(),d:data}));}catch(e){}
+    }).catch(function(){});
+  })();
 
   // ----- checklists with memory (localStorage) -----
   function store(key){
