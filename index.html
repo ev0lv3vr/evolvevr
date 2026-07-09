@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <style>
   :root{
     --night:#0d1430; --night2:#131e46; --panel:#182356; --indigo:#233a72;
@@ -37,7 +38,7 @@
 
   /* ===== sticky nav ===== */
   .topnav{
-    position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:center;gap:4px;
+    position:fixed;top:0;left:0;right:0;z-index:1001;display:flex;justify-content:center;gap:4px;
     padding:10px 14px;background:rgba(8,11,26,.82);backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);transform:translateY(-110%);transition:transform .35s ease;
     overflow-x:auto;white-space:nowrap;scrollbar-width:none;
@@ -269,6 +270,25 @@
   .maplinks{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
   .maplink{font-size:.78rem;font-weight:700;color:var(--lantern-hot);border:1px solid rgba(246,177,60,.35);border-radius:20px;padding:5px 12px;display:inline-flex;align-items:center;gap:6px}
   .maplink:hover{background:rgba(246,177,60,.12);text-decoration:none}
+
+  /* ===== TRIP MAP ===== */
+  .mapbox{margin:0 0 38px}
+  .mapdays{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .mapdays button{font-family:inherit;cursor:pointer;font-size:.78rem;font-weight:700;color:var(--dim);
+    background:rgba(77,120,201,.12);border:1px solid rgba(126,163,224,.25);border-radius:20px;padding:6px 13px}
+  .mapdays button:hover{color:var(--lantern-hot);border-color:rgba(246,177,60,.5)}
+  .mapdays button[aria-pressed="true"]{background:var(--lantern);border-color:var(--lantern);color:#0d1430}
+  #tripmap{height:440px;border-radius:20px;border:1px solid var(--line);background:#0a0f26;position:relative;z-index:1;overflow:hidden}
+  #tripmap .fallback{position:absolute;inset:0;display:grid;place-items:center;color:var(--dimmer);text-align:center;padding:20px;font-size:.9rem}
+  .mpin-wrap{background:none;border:none}
+  .mpin{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;
+    font-size:.76rem;border:2px solid rgba(255,255,255,.75);box-shadow:0 2px 10px rgba(0,0,0,.55);font-family:var(--sans)}
+  .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#182356;color:var(--paper);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+  .leaflet-popup-content{font-family:var(--sans);font-size:.88rem;margin:10px 14px;line-height:1.45}
+  .leaflet-container{font-family:var(--sans)}
+  .leaflet-control-attribution{background:rgba(8,11,26,.7)!important;color:var(--dimmer)!important;font-size:.62rem!important}
+  .leaflet-control-attribution a{color:var(--ai-soft)!important}
+  @media(max-width:820px){#tripmap{height:360px}}
 
   /* festival spotlight */
   .spot{border-radius:22px;overflow:hidden;border:1px solid rgba(255,215,122,.25);
@@ -704,7 +724,15 @@
   <div class="wrap">
     <div class="eyebrow">The whole plan <span class="jp">旅程</span></div>
     <h2 class="sec">Day by day</h2>
-    <p class="sec-sub">Times are a guide, not a rulebook — but this is the shape of each day. Tap the map pins to open any spot in Google Maps.</p>
+    <p class="sec-sub">Times are a guide, not a rulebook — but this is the shape of each day. Pick a day on the map to see exactly where we'll be; the 📍 pins on each card open Apple Maps for directions.</p>
+
+    <div class="mapbox">
+      <div class="mapdays" id="mapdays" role="group" aria-label="Choose a day to show on the map"></div>
+      <div id="tripmap" aria-label="Interactive trip map">
+        <div class="fallback">The interactive map needs an internet connection — the 📍 pins on the day cards below open every stop in Apple Maps.</div>
+      </div>
+      <div class="map-note">Tap a day chip · drag to explore · tap a numbered pin for what's there</div>
+    </div>
 
     <div class="timeline">
 
@@ -1286,7 +1314,77 @@
   </div>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
+  // ----- interactive trip map (Leaflet + dark CARTO tiles; hides gracefully offline) -----
+  (function(){
+    var mapEl=document.getElementById('tripmap');
+    if(!mapEl||typeof L==='undefined')return; // CDN blocked -> fallback message stays
+    var CLR={tokyo:'#4d78c9',kyoto:'#ec5540',nara:'#c1432f',yokohama:'#7ea3e0',travel:'#8a6fc9'};
+    // note: Seattle plotted at lon+360 so the flight line crosses the Pacific, not the Atlantic
+    var DAYS=[
+      {label:'✈ Day 1',kind:'travel',stops:[[47.4502,237.6912,'SEA — wheels up Thu 4:30 PM'],[35.5494,139.7798,'HND Haneda — land Fri 7:00 PM']]},
+      {label:'Day 2 · Tokyo',kind:'tokyo',stops:[[35.5494,139.7798,'Haneda T3 — QR kiosks, yen, bags'],[35.6957,139.6917,'Mimaru Shinjuku West — home for 4 nights']]},
+      {label:'Day 3 · Tokyo',kind:'tokyo',stops:[[35.7148,139.7967,'Senso-ji temple, Asakusa'],[35.7101,139.8107,'Tokyo Skytree'],[35.7022,139.7745,'Akihabara'],[35.6595,139.7005,'Shibuya Crossing + dinner']]},
+      {label:'Day 4 · Tokyo',kind:'tokyo',stops:[[35.6493,139.7898,'teamLab Planets'],[35.6437,139.7965,'Toyosu Market (Sun: Tsukiji plan B)'],[35.6648,139.7128,'Aoyama — salon & Papa’s shopping loop'],[35.6702,139.7027,'Harajuku & Omotesando'],[35.6604,139.7292,'Tokyo City View, Roppongi — night skyline']]},
+      {label:'Day 5 · Yokohama',kind:'yokohama',stops:[[35.4553,139.6369,'Cup Noodle Museum'],[35.4541,139.6327,'Minato Mirai & Air Cabin'],[35.4437,139.6425,'Chinatown']]},
+      {label:'Day 6 · Kyoto',kind:'kyoto',stops:[[34.9858,135.7585,'Kyoto Station — Nozomi arrives 11:15'],[35.0050,135.7649,'Nishiki Market — lunch'],[34.9671,135.7727,'Fushimi Inari'],[35.0052,135.7692,'Cross Hotel Kyoto — 5 nights'],[35.0039,135.7596,'Yoi-yoi-yoiyama float streets']]},
+      {label:'Day 7 · Kyoto',kind:'kyoto',stops:[[35.0170,135.6710,'Arashiyama Bamboo Grove'],[35.0128,135.6778,'Iwatayama Monkey Park'],[35.0158,135.6737,'Tenryu-ji'],[35.0394,135.7292,'Kinkaku-ji — Golden Pavilion'],[35.0039,135.7596,'Festival night #2']]},
+      {label:'Day 8 · Nara',kind:'nara',stops:[[34.6890,135.8398,'Todai-ji — Great Buddha'],[34.6851,135.8430,'Nara Park — bowing deer'],[34.6812,135.8271,'Nakatanidou — mochi pounding'],[35.0039,135.7596,'YOIYAMA — the big night (back in Kyoto)']]},
+      {label:'Day 9 · Kyoto',kind:'kyoto',stops:[[35.0038,135.7685,'Parade corner — Shijo × Kawaramachi, 5 min from hotel'],[35.0050,135.7649,'Nishiki Market — last souvenirs'],[35.0043,135.7709,'Pontocho Moriaka — farewell kaiseki']]},
+      {label:'Day 10 · Kyoto',kind:'kyoto',stops:[[34.9949,135.7850,'Kiyomizu-dera'],[34.9968,135.7810,'Sannenzaka & Ninenzaka lanes'],[35.0052,135.7692,'Back to the hotel — pack easy']]},
+      {label:'Day 11 · Home',kind:'travel',stops:[[34.9858,135.7585,'Kyoto Station — Nozomi 11:01'],[35.6812,139.7671,'Tokyo Station — coin lockers'],[35.6717,139.7650,'Ginza — hands-free afternoon'],[35.5494,139.7798,'HND — NH118 at 9:15 PM'],[47.4502,237.6912,'Land in Seattle the same day']]}
+    ];
+    var fb=mapEl.querySelector('.fallback'); if(fb)fb.remove();
+    var map=L.map(mapEl,{scrollWheelZoom:false});
+    map.on('click',function(){map.scrollWheelZoom.enable();});
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains:'abcd',maxZoom:19
+    }).addTo(map);
+    var layer=L.layerGroup().addTo(map);
+    function draw(d){
+      var c=CLR[d.kind]||'#4d78c9';
+      L.polyline(d.stops.map(function(s){return [s[0],s[1]];}),{color:c,weight:3,opacity:.7,dashArray:'6 8'}).addTo(layer);
+      d.stops.forEach(function(s,i){
+        L.marker([s[0],s[1]],{icon:L.divIcon({className:'mpin-wrap',html:'<div class="mpin" style="background:'+c+'">'+(i+1)+'</div>',iconSize:[26,26],iconAnchor:[13,13]})})
+          .addTo(layer).bindPopup('<b>'+d.label+'</b><br>'+s[2]);
+      });
+      return d.stops.map(function(s){return [s[0],s[1]];});
+    }
+    function show(idx){
+      layer.clearLayers();
+      document.querySelectorAll('#mapdays button').forEach(function(b,i){b.setAttribute('aria-pressed',i===idx?'true':'false');});
+      var pts=[];
+      if(idx===0){
+        DAYS.forEach(function(d){
+          var jp={label:d.label,kind:d.kind,stops:d.stops.filter(function(s){return s[1]<180;})};
+          if(jp.stops.length)pts=pts.concat(draw(jp));
+        });
+      }else{
+        pts=draw(DAYS[idx-1]);
+      }
+      map.fitBounds(L.latLngBounds(pts),{padding:[36,36],maxZoom:15});
+    }
+    var wrap=document.getElementById('mapdays');
+    ['🗾 All Japan'].concat(DAYS.map(function(d){return d.label;})).forEach(function(t,i){
+      var b=document.createElement('button');
+      b.type='button';b.textContent=t;b.setAttribute('aria-pressed','false');
+      b.addEventListener('click',function(){show(i);});
+      wrap.appendChild(b);
+    });
+    show(0);
+    // add a "day on the map" pill to every day card
+    document.querySelectorAll('.timeline .day-card').forEach(function(card,i){
+      var links=card.querySelector('.maplinks');
+      if(!links){links=document.createElement('div');links.className='maplinks';card.querySelector('.day-body').appendChild(links);}
+      var a=document.createElement('a');
+      a.className='maplink';a.href='#tripmap';a.textContent='🗾 Day '+(i+1)+' on the map';
+      a.addEventListener('click',function(){show(i+1);});
+      links.appendChild(a);
+    });
+  })();
+
   // ----- stars + drifting fireflies -----
   (function(){
     var s=document.getElementById('stars'),h='';
