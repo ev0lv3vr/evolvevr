@@ -1,0 +1,14 @@
+{
+  "name": "Japan 2026 · Our Trip",
+  "short_name": "Japan 2026",
+  "description": "Papa, Anastasiya & Vlada — Tokyo → Kyoto, July 9–19 2026. The whole plan, every ticket, one page.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d1430",
+  "theme_color": "#0d1430",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

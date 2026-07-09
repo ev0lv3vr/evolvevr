@@ -6,6 +6,15 @@
 <title>Japan 2026 · Our Trip</title>
 <meta name="description" content="Papa, Anastasiya & Vlada — Tokyo → Kyoto, July 9–19 2026, timed for the peak of Gion Matsuri. The whole plan, every ticket, one page.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%AE%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0d1430">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Japan 2026">
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="dns-prefetch" href="https://a.basemaps.cartocdn.com">
+<link rel="dns-prefetch" href="https://api.open-meteo.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -290,6 +299,23 @@
   .leaflet-control-attribution{background:rgba(8,11,26,.7)!important;color:var(--dimmer)!important;font-size:.62rem!important}
   .leaflet-control-attribution a{color:var(--ai-soft)!important}
   @media(max-width:820px){#tripmap{height:360px}}
+  .youare{width:16px;height:16px;border-radius:50%;background:var(--ai);border:3px solid #fff;
+    box-shadow:0 0 0 0 rgba(77,120,201,.55);animation:youpulse 2s ease-out infinite}
+  @keyframes youpulse{0%{box-shadow:0 0 0 0 rgba(77,120,201,.55)}70%{box-shadow:0 0 0 18px rgba(77,120,201,0)}100%{box-shadow:0 0 0 0 rgba(77,120,201,0)}}
+
+  /* trip mode (during Jul 9-19) */
+  .day-card{scroll-margin-top:74px}
+  .day-card.today{border-color:rgba(246,177,60,.6);box-shadow:0 0 0 1px rgba(246,177,60,.45),0 18px 60px -18px rgba(246,177,60,.4)}
+  .today-badge{display:inline-block;background:var(--lantern);color:#0d1430;border-radius:6px;padding:1px 8px;
+    font-size:.64rem;letter-spacing:.12em;font-weight:900;margin-right:8px;vertical-align:1px}
+  .topnav .todaylink{color:var(--lantern-hot)}
+
+  /* taxi cards */
+  .taxi{margin-top:12px;background:rgba(0,0,0,.22);border:1px dashed rgba(126,163,224,.3);border-radius:12px;padding:12px 14px}
+  .taxi .lab{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dimmer);font-weight:700}
+  .taxi .jp{font-family:var(--serif);color:#fff;font-size:1.02rem;line-height:1.55;margin-top:4px}
+  .taxi .say{color:var(--lantern-hot);font-size:.86rem;margin-top:6px}
+  .taxi .say small{color:var(--dimmer)}
 
   /* festival spotlight */
   .spot{border-radius:22px;overflow:hidden;border:1px solid rgba(255,215,122,.25);
@@ -654,6 +680,11 @@
           <div class="kv"><span>Beds</span><b>2 futons + 2 singles</b></div>
           <div class="kv"><span>Perks</span><b>Kitchen · living room</b></div>
           <div class="kv"><span>Area</span><b>Shinjuku (10 min walk to station)</b></div>
+          <div class="taxi">
+            <div class="lab">🚕 Show the driver</div>
+            <div class="jp" lang="ja">MIMARU東京 新宿WEST<br>東京都新宿区西新宿 3-3-11<br>ここまでお願いします。</div>
+            <div class="say">"Koko made onegai shimasu" <small>— please take me here · ☎ 03-6258-1512</small></div>
+          </div>
         </div>
       </div>
       <div class="hotel kyo">
@@ -664,6 +695,11 @@
           <div class="kv"><span>Beds</span><b>Sofa bed + 2 singles</b></div>
           <div class="kv"><span>Breakfast</span><b>Included ✓</b></div>
           <div class="kv"><span>Area</span><b>Kawaramachi — 5 min to the parade!</b></div>
+          <div class="taxi">
+            <div class="lab">🚕 Show the driver</div>
+            <div class="jp" lang="ja">クロスホテル京都<br>京都市中京区河原町通三条下ル大黒町71-1<br>ここまでお願いします。</div>
+            <div class="say">"Koko made onegai shimasu" <small>— please take me here</small></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1317,8 +1353,18 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
-  // ----- interactive trip map (Leaflet + dark CARTO tiles; hides gracefully offline) -----
-  (function(){
+  // ----- which trip day is it? (0 = not during the trip; 1-11 during Jul 9-19, by device-local date) -----
+  var TRIP_DATES=['2026-07-09','2026-07-10','2026-07-11','2026-07-12','2026-07-13','2026-07-14','2026-07-15','2026-07-16','2026-07-17','2026-07-18','2026-07-19'];
+  function pad2(x){return (x<10?'0':'')+x;}
+  function todayLocal(){var d=new Date();return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());}
+  var TODAY_IDX=TRIP_DATES.indexOf(todayLocal())+1; // 0 if not found
+  var TRIP_OVER=todayLocal()>TRIP_DATES[TRIP_DATES.length-1];
+
+  // ----- interactive trip map (Leaflet + bright CARTO tiles; hides gracefully offline) -----
+  var initTripMap=(function(){
+    var done=false;
+    return function(){
+    if(done)return; done=true;
     var mapEl=document.getElementById('tripmap');
     if(!mapEl||typeof L==='undefined')return; // CDN blocked -> fallback message stays
     var CLR={tokyo:'#4d78c9',kyoto:'#ec5540',nara:'#c1432f',yokohama:'#7ea3e0',travel:'#8a6fc9'};
@@ -1355,7 +1401,7 @@
     }
     function show(idx){
       layer.clearLayers();
-      document.querySelectorAll('#mapdays button').forEach(function(b,i){b.setAttribute('aria-pressed',i===idx?'true':'false');});
+      document.querySelectorAll('#mapdays button:not(.locbtn)').forEach(function(b,i){b.setAttribute('aria-pressed',i===idx?'true':'false');});
       var pts=[];
       if(idx===0){
         DAYS.forEach(function(d){
@@ -1374,16 +1420,43 @@
       b.addEventListener('click',function(){show(i);});
       wrap.appendChild(b);
     });
-    show(0);
+    // "you are here" — live GPS position next to the day's pins
+    var youMarker=null;
+    var loc=document.createElement('button');
+    loc.type='button';loc.className='locbtn';loc.textContent='📡 Where am I?';
+    loc.addEventListener('click',function(){
+      if(!navigator.geolocation){loc.textContent='📡 No GPS on this device';return;}
+      loc.textContent='📡 Locating…';
+      navigator.geolocation.getCurrentPosition(function(p){
+        var ll=[p.coords.latitude,p.coords.longitude];
+        if(youMarker)youMarker.setLatLng(ll);
+        else youMarker=L.marker(ll,{icon:L.divIcon({className:'mpin-wrap',html:'<div class="youare"></div>',iconSize:[16,16],iconAnchor:[8,8]}),zIndexOffset:1000}).addTo(map).bindPopup('You are here');
+        map.setView(ll,Math.max(map.getZoom(),14));
+        loc.textContent='📡 You are here';
+      },function(){loc.textContent='📡 Location unavailable';},{enableHighAccuracy:true,timeout:10000});
+    });
+    wrap.appendChild(loc);
+    show(TODAY_IDX>0?TODAY_IDX:0); // during the trip, open on today
     // add a "day on the map" pill to every day card
     document.querySelectorAll('.timeline .day-card').forEach(function(card,i){
       var links=card.querySelector('.maplinks');
       if(!links){links=document.createElement('div');links.className='maplinks';card.querySelector('.day-body').appendChild(links);}
       var a=document.createElement('a');
       a.className='maplink';a.href='#tripmap';a.textContent='🗾 Day '+(i+1)+' on the map';
-      a.addEventListener('click',function(){show(i+1);});
+      a.addEventListener('click',function(){initTripMap();show(i+1);});
       links.appendChild(a);
     });
+    };
+  })();
+  // lazy-init the map when it scrolls near the viewport (saves tile downloads)
+  (function(){
+    var el=document.getElementById('tripmap');
+    if(!el)return;
+    if(!('IntersectionObserver' in window)){initTripMap();return;}
+    var io=new IntersectionObserver(function(es){
+      if(es[0].isIntersecting){io.disconnect();initTripMap();}
+    },{rootMargin:'500px'});
+    io.observe(el);
   })();
 
   // ----- stars + drifting fireflies -----
@@ -1406,9 +1479,21 @@
     var cd=document.getElementById('cd'),ch=document.getElementById('ch'),cm=document.getElementById('cm'),cs=document.getElementById('cs');
     var lbl=document.getElementById('countLabel'),foot=document.getElementById('footCount');
     if(diff<=0){
-      cd.textContent='0';ch.textContent='00';cm.textContent='00';cs.textContent='00';
-      lbl.textContent='we\'re on our way ✈';
-      foot.textContent='🇯🇵 Japan, here we come';
+      var counts=document.getElementById('count');
+      if(TODAY_IDX>0){
+        var t=document.querySelectorAll('.timeline .day-card h3')[TODAY_IDX-1];
+        counts.style.display='none';
+        lbl.textContent='Day '+TODAY_IDX+' of 11 · '+(t?t.textContent:'');
+        foot.textContent='🏮 Day '+TODAY_IDX+' of 11 — '+(t?t.textContent:'');
+      }else if(TRIP_OVER){
+        counts.style.display='none';
+        lbl.textContent='we did it — best trip ever 🇯🇵';
+        foot.textContent='Japan 2026, complete. Time to print the photos 📷';
+      }else{
+        cd.textContent='0';ch.textContent='00';cm.textContent='00';cs.textContent='00';
+        lbl.textContent='we\'re on our way ✈';
+        foot.textContent='🇯🇵 Japan, here we come';
+      }
       return;
     }
     var d=Math.floor(diff/86400000);
@@ -1419,6 +1504,26 @@
     foot.textContent=d+' days · '+pad(hh)+':'+pad(mm)+':'+pad(ss)+' until takeoff';
   }
   tick();setInterval(tick,1000);
+
+  // ----- trip mode: badge + glow on today's card, "Today" link in the nav -----
+  (function(){
+    if(TODAY_IDX<1)return;
+    var card=document.querySelectorAll('.timeline .day-card')[TODAY_IDX-1];
+    if(!card)return;
+    card.classList.add('today');
+    card.id='today';
+    var date=card.querySelector('.date');
+    if(date)date.insertAdjacentHTML('afterbegin','<span class="today-badge">TODAY</span>');
+    var nav=document.getElementById('topnav');
+    var a=document.createElement('a');
+    a.href='#today';a.className='todaylink';a.textContent='★ Today';
+    nav.insertBefore(a,nav.children[1]);
+  })();
+
+  // ----- offline: cache the page + map library so it opens without signal -----
+  if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  }
 
   // ----- scroll reveal for day cards -----
   var io=new IntersectionObserver(function(entries){
