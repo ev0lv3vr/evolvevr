@@ -278,7 +278,8 @@
     background:rgba(77,120,201,.12);border:1px solid rgba(126,163,224,.25);border-radius:20px;padding:6px 13px}
   .mapdays button:hover{color:var(--lantern-hot);border-color:rgba(246,177,60,.5)}
   .mapdays button[aria-pressed="true"]{background:var(--lantern);border-color:var(--lantern);color:#0d1430}
-  #tripmap{height:440px;border-radius:20px;border:1px solid var(--line);background:#0a0f26;position:relative;z-index:1;overflow:hidden}
+  #tripmap{height:440px;border-radius:20px;border:1px solid var(--line);background:#e8e6df;position:relative;z-index:1;overflow:hidden}
+  #tripmap .fallback{background:#0a0f26}
   #tripmap .fallback{position:absolute;inset:0;display:grid;place-items:center;color:var(--dimmer);text-align:center;padding:20px;font-size:.9rem}
   .mpin-wrap{background:none;border:none}
   .mpin{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;
@@ -1338,7 +1339,7 @@
     var fb=mapEl.querySelector('.fallback'); if(fb)fb.remove();
     var map=L.map(mapEl,{scrollWheelZoom:false});
     map.on('click',function(){map.scrollWheelZoom.enable();});
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
       attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains:'abcd',maxZoom:19
     }).addTo(map);
